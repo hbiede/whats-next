@@ -20,20 +20,21 @@ struct ItemListView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(items) {
+                ForEach(items) { item in
                     VStack {
-                        Text($0.name!)
+                        Text(item.name!)
                             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                             .frame(maxWidth: .infinity, alignment: .leading)
-                        if $0.author != nil && $0.author != "" {
-                            Text("By \($0.author!)")
+                        if item.author != nil && item.author != "" {
+                            Text("By \(item.author!)")
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.top, 0.5)
                         }
-                        Text("Recommender: \($0.recommender!)")
+                        Text("Recommender: \(item.recommender!)")
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.top, 1)
-                        Text("Recommended on: \($0.recommendationDate!, formatter: itemFormatter)")
+                        Text("Recommended on: \(item.recommendationDate!, formatter: itemFormatter)")
+                            .accessibilityLabel("Recommended on: \(item.recommendationDate!, formatter: spokenItemFormatter)")
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.top, 1)
                     }
@@ -64,6 +65,13 @@ struct ItemListView: View {
 private let itemFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateStyle = .short
+    formatter.timeStyle = .none
+    return formatter
+}()
+
+private let spokenItemFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .long
     formatter.timeStyle = .none
     return formatter
 }()

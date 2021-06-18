@@ -46,24 +46,32 @@ struct UpNextScreen: View {
                     if currentItem != nil {
                         Text(currentItem!.name!)
                             .font(.title)
+                            .accessibilityHint("Recommendation Title")
                         if currentItem?.type == "Book" {
                             HStack {
                                 Text("Author").font(.title3).fontWeight(.light)
                                 Spacer()
-                                Text(currentItem!.author!).font(.title3)
+                                Text(currentItem!.author!)
+                                    .font(.title3)
+                                    .accessibilityHint("Author")
                             }
                                 .padding()
                         }
                         HStack {
                             Text("Recommended by").font(.title3).fontWeight(.light)
                             Spacer()
-                            Text(currentItem!.recommender!).font(.title2)
+                            Text(currentItem!.recommender!)
+                                .font(.title2)
+                                .accessibilityHint("Recommended by")
                         }
                             .padding()
                         HStack {
                             Text("Recommended on").font(.title3).fontWeight(.light)
                             Spacer()
-                            Text(currentItem!.recommendationDate!, formatter: itemFormatter).font(.title3)
+                            Text(currentItem!.recommendationDate!, formatter: itemFormatter)
+                                .font(.title3)
+                                .accessibilityLabel("\(currentItem!.recommendationDate!, formatter: spokenItemFormatter)")
+                                .accessibilityHint("Recommended on")
                         }
                             .padding()
                     } else if selectedType == .movie {
@@ -97,6 +105,13 @@ struct UpNextScreen: View {
 private let itemFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateStyle = .short
+    formatter.timeStyle = .none
+    return formatter
+}()
+
+private let spokenItemFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .long
     formatter.timeStyle = .none
     return formatter
 }()

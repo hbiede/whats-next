@@ -13,15 +13,20 @@ struct MainScreenView: View {
     @FetchRequest(sortDescriptors: [])
     private var items: FetchedResults<Item>
 
+    @State var startPoint = UnitPoint(x: 0, y: 0)
+    @State var endPoint = UnitPoint(x: 0, y: 2)
+
     var body: some View {
         NavigationView {
             ZStack {
-                Color.init(red: 0.56862745, green: 0.07058824, blue: 0.94901961).ignoresSafeArea()
+                AnimatedBackground().edgesIgnoringSafeArea(.all)
+
                 VStack {
                     Spacer()
                     Text("What's Next?")
+                        .accessibilityElement()
                         .foregroundColor(.white)
-                        .font(.largeTitle.bold())
+                        .font(.largeTitle.bold().lowercaseSmallCaps())
                         .multilineTextAlignment(.center)
                     Spacer()
                     Spacer()
@@ -30,6 +35,7 @@ struct MainScreenView: View {
                             .font(.largeTitle)
                             .fontWeight(.bold)
                             .foregroundColor(.black)
+                            .accessibilityElement()
                             .padding()
                             .padding(.horizontal, 10)
                             .background(Color.white)
@@ -40,12 +46,13 @@ struct MainScreenView: View {
                         .opacity(items.count == 0 ? 0.4 : 1)
                         .disabled(items.count == 0)
                     NavigationLink(destination: AddRecScreen()) {
-                        Text("    Add    ")
+                        Text("Add")
                             .font(.title)
                             .fontWeight(.semibold)
                             .foregroundColor(.black)
+                            .accessibilityElement()
                             .padding()
-                            .padding(.horizontal, 40)
+                            .padding(.horizontal, 20)
                             .background(Color.white)
 
                     }
@@ -56,8 +63,9 @@ struct MainScreenView: View {
                             .font(.title)
                             .fontWeight(.semibold)
                             .foregroundColor(.black)
+                            .accessibilityElement()
                             .padding()
-                            .padding(.horizontal, 40)
+                            .padding(.horizontal, 20)
                             .background(Color.white)
 
                     }
@@ -68,6 +76,28 @@ struct MainScreenView: View {
                 }
             }
         }.navigationViewStyle(StackNavigationViewStyle())
+    }
+}
+
+struct AnimatedBackground: View {
+    @Environment(\.accessibilityReduceMotion) var reduceMotion
+
+    @State var rotation = 0.0
+
+    let timer = Timer.publish(every: 0.1, on: .main, in: .default).autoconnect()
+    let colors = [
+        Color.init(red: 0.56862745, green: 0.07058824, blue: 0.94901961),
+        Color.init(red: 0.75862745, green: 0.27058824, blue: 1),
+        Color.blue,
+        Color.init(red: 0.56862745, green: 0.07058824, blue: 0.94901961)
+    ]
+
+    var body: some View {
+        AngularGradient(colors: colors, center: UnitPoint(x: 4, y: 0), angle: .degrees(self.rotation))
+            .onReceive(timer, perform: { _ in
+                self.rotation = (self.rotation + (reduceMotion ? 0.2 : 2)).truncatingRemainder(dividingBy: 360)
+            })
+            .ignoresSafeArea()
     }
 }
 
