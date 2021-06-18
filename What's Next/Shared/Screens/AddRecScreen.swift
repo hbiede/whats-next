@@ -10,7 +10,7 @@ import SwiftUI
 struct AddRecScreen: View {
     @Environment(\.managedObjectContext) private var viewContext
 
-    @State private var selectedType: Type = .Movie
+    @State private var selectedType: Type = .movie
     @State private var name: String = ""
     @State private var author: String = ""
     @State private var recommender: String = ""
@@ -23,18 +23,19 @@ struct AddRecScreen: View {
             if saveError {
                 Section {
                     Text("Failed to save")
-                }.listRowBackground(Color.red.opacity(0.3))
+                }
+                    .listRowBackground(Color.red.opacity(0.3))
             }
             Section {
                 Picker("Type", selection: $selectedType) {
-                    Text("Movie").tag(Type.Movie)
-                    Text("TV Show").tag(Type.TVShow)
-                    Text("Book").tag(Type.Book)
+                    ForEach(Type.allCases) {
+                        Text($0.description).tag($0)
+                    }
                 }
                     .pickerStyle(SegmentedPickerStyle())
-                if selectedType == .Movie {
+                if selectedType == .movie {
                     TextField("Movie name", text: $name)
-                } else if selectedType == .Book {
+                } else if selectedType == .book {
                     TextField("Book name", text: $name)
                     TextField("Author", text: $author)
                 } else {
@@ -48,11 +49,14 @@ struct AddRecScreen: View {
                 )
             }
             Button("Add", action: confirm)
-                .disabled(name.trimmingCharacters(in: .whitespacesAndNewlines) == "" || (selectedType == .Book && author.trimmingCharacters(in: .whitespacesAndNewlines) == "") || recommender.trimmingCharacters(in: .whitespacesAndNewlines) == "")
+                .disabled(
+                    name.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+                        (selectedType == .book && author.trimmingCharacters(in: .whitespacesAndNewlines) == "") ||
+                        recommender.trimmingCharacters(in: .whitespacesAndNewlines) == "")
         }
         .navigationTitle("Add Recommendation")
     }
-    
+
     func confirm() {
         saveError = false
         let newItem = Item(context: viewContext)
@@ -61,9 +65,9 @@ struct AddRecScreen: View {
         newItem.recommender = recommender
         newItem.recommendationDate = recDate
 
-        if selectedType == .Movie {
+        if selectedType == .movie {
             newItem.type = "Movie"
-        } else if selectedType == .Book {
+        } else if selectedType == .book {
             newItem.type = "Book"
         } else {
             newItem.type = "TV Show"

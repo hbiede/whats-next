@@ -16,7 +16,7 @@ struct UpNextScreen: View {
     private var items: FetchedResults<Item>
 
     @State private var currentItem: Item?
-    @State private var selectedType: Type = .Movie
+    @State private var selectedType: Type = .movie
 
     @Environment(\.colorScheme) var colorScheme
 
@@ -26,33 +26,21 @@ struct UpNextScreen: View {
             VStack {
                 VStack {
                     Picker("Type", selection: $selectedType) {
-                        Text("Movie").tag(Type.Movie)
-                        Text("TV Show").tag(Type.TVShow)
-                        Text("Book").tag(Type.Book)
+                        ForEach(Type.allCases) {
+                            Text($0.description).tag($0)
+                        }
                     }
                         .frame(width: UIScreen.main.bounds.size.width * 0.8)
                         .pickerStyle(SegmentedPickerStyle())
                         .background(Color.white)
                         .padding()
-                        .onChange(of: selectedType){ newType in
+                        .onChange(of: selectedType) { newType in
                             // Update current item based on newly selected type
-                            if newType == .Movie {
-                                currentItem = items.filter{ $0.type == "Movie" }.randomElement()
-                            } else if newType == .Book {
-                                currentItem = items.filter{ $0.type == "Book" }.randomElement()
-                            } else {
-                                currentItem = items.filter{ $0.type == "TV Show" }.randomElement()
-                            }
+                            currentItem = items.filter { $0.type == newType.description }.randomElement()
                         }
-                    .onAppear(){
+                    .onAppear {
                         // Set `currentItem` for initial frame
-                        if selectedType == .Movie {
-                            currentItem = items.filter{ $0.type == "Movie" }.randomElement()
-                        } else if selectedType == .Book {
-                            currentItem = items.filter{ $0.type == "Book" }.randomElement()
-                        } else {
-                            currentItem = items.filter{ $0.type == "TV Show" }.randomElement()
-                        }
+                        currentItem = items.filter { $0.type == selectedType.description }.randomElement()
                     }
 
                     if currentItem != nil {
@@ -78,10 +66,10 @@ struct UpNextScreen: View {
                             Text(currentItem!.recommendationDate!, formatter: itemFormatter).font(.title3)
                         }
                             .padding()
-                    } else if selectedType == .Movie {
+                    } else if selectedType == .movie {
                         Text("No movie records found")
                             .padding()
-                    } else if selectedType == .Book {
+                    } else if selectedType == .book {
                         Text("No book records found")
                             .padding()
                     } else {

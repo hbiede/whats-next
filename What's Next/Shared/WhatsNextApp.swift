@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct What_s_NextApp: App {
+struct WhatsNextApp: App {
     let persistenceController = PersistenceController.shared
 
     var body: some Scene {

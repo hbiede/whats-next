@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainScreenView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    
+
     @FetchRequest(sortDescriptors: [])
     private var items: FetchedResults<Item>
 
@@ -33,7 +33,7 @@ struct MainScreenView: View {
                             .padding()
                             .padding(.horizontal, 10)
                             .background(Color.white)
-                            
+
                     }
                         .clipShape(Capsule())
                         .padding(.bottom, 10)
@@ -47,7 +47,7 @@ struct MainScreenView: View {
                             .padding()
                             .padding(.horizontal, 40)
                             .background(Color.white)
-                            
+
                     }
                         .clipShape(Capsule())
                         .padding(.bottom, 10)
@@ -59,7 +59,7 @@ struct MainScreenView: View {
                             .padding()
                             .padding(.horizontal, 40)
                             .background(Color.white)
-                            
+
                     }
                         .clipShape(Capsule())
                         .opacity(items.count == 0 ? 0.4 : 1)
