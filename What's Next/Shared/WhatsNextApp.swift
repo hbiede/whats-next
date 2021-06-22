@@ -1,5 +1,5 @@
 //
-//  What_s_NextApp.swift
+//  WhatsNextApp.swift
 //  Shared
 //
 //  Created by Hundter Biede on 6/17/21.

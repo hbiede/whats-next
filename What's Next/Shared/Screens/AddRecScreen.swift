@@ -15,6 +15,7 @@ struct AddRecScreen: View {
     @State private var author: String = ""
     @State private var recommender: String = ""
     @State private var recDate: Date = Date()
+    @State private var notes: String = ""
     @State private var saveError = false
 
     @ViewBuilder
@@ -47,6 +48,9 @@ struct AddRecScreen: View {
                     selection: $recDate,
                     displayedComponents: [.date]
                 )
+                TextField("Notes", text: $notes)
+                    .multilineTextAlignment(.leading)
+                    .lineLimit(3)
             }
             Button("Add", action: confirm)
                 .disabled(
@@ -60,10 +64,12 @@ struct AddRecScreen: View {
     func confirm() {
         saveError = false
         let newItem = Item(context: viewContext)
+        newItem.id = UUID()
         newItem.name = name
         newItem.author = author
         newItem.recommender = recommender
         newItem.recommendationDate = recDate
+        newItem.notes = notes
 
         if selectedType == .movie {
             newItem.type = "Movie"
@@ -78,6 +84,7 @@ struct AddRecScreen: View {
             author = ""
             recommender = ""
             recDate = Date()
+            notes = ""
         } catch {
             print("Failed to save context to CoreData on \(Date())")
             saveError = true

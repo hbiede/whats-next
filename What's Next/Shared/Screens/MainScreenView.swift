@@ -19,7 +19,7 @@ struct MainScreenView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                AnimatedBackground().edgesIgnoringSafeArea(.all)
+                AnimatedBackground()
 
                 VStack {
                     Spacer()
@@ -75,7 +75,10 @@ struct MainScreenView: View {
                     Spacer()
                 }
             }
-        }.navigationViewStyle(StackNavigationViewStyle())
+        }
+            #if os(iOS)
+            .navigationViewStyle(StackNavigationViewStyle())
+            #endif
     }
 }
 
@@ -86,7 +89,7 @@ struct AnimatedBackground: View {
 
     let timer = Timer.publish(every: 0.1, on: .main, in: .default).autoconnect()
     let colors = [
-        Color.init(red: 0.56862745, green: 0.07058824, blue: 0.94901961),
+        .accentColor,
         Color.init(red: 0.75862745, green: 0.27058824, blue: 1),
         Color.blue,
         Color.init(red: 0.56862745, green: 0.07058824, blue: 0.94901961)

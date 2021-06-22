@@ -30,9 +30,13 @@ struct UpNextScreen: View {
                             Text($0.description).tag($0)
                         }
                     }
+                        #if os(iOS)
                         .frame(width: UIScreen.main.bounds.size.width * 0.8)
+                        #else
+                        .frame(width: .infinity)
+                        .padding([.horizontal], 20)
+                        #endif
                         .pickerStyle(SegmentedPickerStyle())
-                        .background(Color.white)
                         .padding()
                         .onChange(of: selectedType) { newType in
                             // Update current item based on newly selected type
@@ -70,7 +74,9 @@ struct UpNextScreen: View {
                             Spacer()
                             Text(currentItem!.recommendationDate!, formatter: itemFormatter)
                                 .font(.title3)
-                                .accessibilityLabel("\(currentItem!.recommendationDate!, formatter: spokenItemFormatter)")
+                                .accessibilityLabel(
+                                    "\(currentItem!.recommendationDate!, formatter: spokenItemFormatter)"
+                                )
                                 .accessibilityHint("Recommended on")
                         }
                             .padding()
@@ -85,20 +91,29 @@ struct UpNextScreen: View {
                             .padding()
                     }
                 }
+                    #if os(iOS)
                     .frame(width: UIScreen.main.bounds.size.width * 0.9)
+                    .navigationBarHidden(true)
+                    #else
+                    .frame(width: .infinity)
+                    .padding([.horizontal], 20)
+                    #endif
                     .background(colorScheme == .dark ? Color.black : Color.white)
                     .cornerRadius(8)
-                    .navigationBarHidden(true)
                     .padding()
                 Spacer()
             }
+                #if os(iOS)
                 .navigationBarHidden(true)
-                .frame(width: UIScreen.main.bounds.size.width)
-                .background(Color.init(red: 0.56862745, green: 0.07058824, blue: 0.94901961))
+                #endif
+                .frame(width: .infinity)
+                .background(Color.accentColor)
                 .ignoresSafeArea(edges: [.bottom, .horizontal])
         }
             .navigationTitle("Up Next")
+            #if os(iOS)
             .navigationViewStyle(StackNavigationViewStyle())
+            #endif
     }
 }
 

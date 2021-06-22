@@ -34,18 +34,24 @@ struct ItemListView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.top, 1)
                         Text("Recommended on: \(item.recommendationDate!, formatter: itemFormatter)")
-                            .accessibilityLabel("Recommended on: \(item.recommendationDate!, formatter: spokenItemFormatter)")
+                            .accessibilityLabel(
+                                "Recommended on: \(item.recommendationDate!, formatter: spokenItemFormatter)"
+                            )
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.top, 1)
                     }
                 }
                 .onDelete(perform: deleteItems)
             }
+            #if os(iOS)
             .navigationBarHidden(true)
+            #endif
         }
         .navigationTitle("Recommendations List")
+        #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         .navigationViewStyle(StackNavigationViewStyle())
+        #endif
     }
 
     private func deleteItems(offsets: IndexSet) {
