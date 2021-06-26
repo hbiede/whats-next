@@ -397,7 +397,7 @@
 				INFOPLIST_KEY_CFBundleExecutable = "What's NextUITests";
 				INFOPLIST_KEY_CFBundleName = "What's Next UI Tests";
 				INFOPLIST_KEY_CFBundleVersion = "$(BUILD_NUMBER)";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -425,7 +425,7 @@
 				INFOPLIST_KEY_CFBundleExecutable = "What's NextUITests";
 				INFOPLIST_KEY_CFBundleName = "What's Next UI Tests";
 				INFOPLIST_KEY_CFBundleVersion = "$(BUILD_NUMBER)";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -447,7 +447,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUILD_NUMBER = 1;
+				BUILD_NUMBER = 4;
 				BUILD_VERSION = 1.0;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -511,7 +511,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUILD_NUMBER = 1;
+				BUILD_NUMBER = 4;
 				BUILD_VERSION = 1.0;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
