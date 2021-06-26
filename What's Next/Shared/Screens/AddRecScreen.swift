@@ -10,76 +10,122 @@ import SwiftUI
 struct AddRecScreen: View {
     @Environment(\.managedObjectContext) private var viewContext
 
-    @State private var selectedType: Type = .movie
+    @State private var selectedType: RecType = .movie
     @State private var name: String = ""
     @State private var author: String = ""
     @State private var recommender: String = ""
     @State private var recDate: Date = Date()
     @State private var notes: String = ""
+
+    @State private var didSave = false
     @State private var saveError = false
 
-    @ViewBuilder
     var body: some View {
-        Form {
-            if saveError {
+        let recommenderBinding = Binding<String>(get: {
+                    self.recommender
+                }, set: {
+                    self.recommender = $0
+                    #if DEBUG
+                    onRecommenderChange($0)
+                    #endif
+                })
+
+        return Form {
+            if didSave &&
+                name == "" &&
+                author == "" &&
+                recommender == "" &&
+                itemFormatter.string(from: Date()) == itemFormatter.string(from: recDate) &&
+                notes == "" {
                 Section {
-                    Text("Failed to save")
+                    Text("success-saved-message", comment: "Message for when an entry is successfully added")
+                }
+                    .listRowBackground(Color.green.opacity(0.3))
+            } else if saveError &&
+                        name == "" &&
+                        author == "" &&
+                        recommender == "" &&
+                        (Date(), formatter: itemFormatter) == (recDate, formatter: itemFormatter) &&
+                        notes == "" {
+                Section {
+                    Text("failed-save-message", comment: "Message for when an entry failed to be added")
                 }
                     .listRowBackground(Color.red.opacity(0.3))
             }
             Section {
-                Picker("Type", selection: $selectedType) {
-                    ForEach(Type.allCases) {
-                        Text($0.description).tag($0)
+                Picker(NSLocalizedString("rec-type-label", comment: "Type selector label"), selection: $selectedType) {
+                    ForEach(RecType.allCases) {
+                        Text(
+                            NSLocalizedString($0.description, comment: "Convert the type to a title cased string")
+                        ).tag($0)
                     }
                 }
                     .pickerStyle(SegmentedPickerStyle())
                 if selectedType == .movie {
-                    TextField("Movie name", text: $name)
+                    TextField(
+                        NSLocalizedString("movie-name-field-label", comment: "Movie name edit field label"),
+                        text: $name
+                    )
                 } else if selectedType == .book {
-                    TextField("Book name", text: $name)
-                    TextField("Author", text: $author)
+                    TextField(
+                        NSLocalizedString("book-name-field-label", comment: "Book title edit field label"),
+                        text: $name
+                    )
+                    TextField(
+                        NSLocalizedString("author-field-label", comment: "Author edit field label"),
+                        text: $author
+                    )
+                    TextField("author-field-label", text: $author)
                 } else {
-                    TextField("TV show name", text: $name)
+                    TextField(
+                        NSLocalizedString("tv-show-name-field-label", comment: "TV Show name edit field label"),
+                        text: $name
+                    )
                 }
-                TextField("Recommended by", text: $recommender)
-                DatePicker(
-                    "Recommended on",
-                    selection: $recDate,
-                    displayedComponents: [.date]
+                TextField(
+                    NSLocalizedString("rec-by-field-label", comment: "Recommended by edit field label"),
+                    text: recommenderBinding
                 )
-                TextField("Notes", text: $notes)
+                #if os(iOS)
+                    .textContentType(.nickname)
+                #endif
+                DatePicker(
+                    NSLocalizedString("rec-date-field-label", comment: "Recommendation date edit field label"),
+                    selection: $recDate,
+                    in: ...Date(),
+                    displayedComponents: .date
+                )
+                TextField(
+                    NSLocalizedString("notes-field-label", comment: "Notes edit field label"),
+                    text: $notes
+                )
                     .multilineTextAlignment(.leading)
                     .lineLimit(3)
             }
-            Button("Add", action: confirm)
+            Button("confirm-addition-button-label", action: confirm)
                 .disabled(
                     name.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
                         (selectedType == .book && author.trimmingCharacters(in: .whitespacesAndNewlines) == "") ||
                         recommender.trimmingCharacters(in: .whitespacesAndNewlines) == "")
         }
-        .navigationTitle("Add Recommendation")
+        .navigationTitle("add-rec-screen-title")
     }
 
-    func confirm() {
+    private func confirm() {
         saveError = false
+        didSave = false
         let newItem = Item(context: viewContext)
         newItem.id = UUID()
-        newItem.name = name
-        newItem.author = author
-        newItem.recommender = recommender
+        newItem.name = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        newItem.author = author.trimmingCharacters(in: .whitespacesAndNewlines)
+        newItem.recommender = recommender.trimmingCharacters(in: .whitespacesAndNewlines)
         newItem.recommendationDate = recDate
-        newItem.notes = notes
+        newItem.notes = notes.trimmingCharacters(in: .whitespacesAndNewlines)
 
-        if selectedType == .movie {
-            newItem.type = "Movie"
-        } else if selectedType == .book {
-            newItem.type = "Book"
-        } else {
-            newItem.type = "TV Show"
-        }
+        newItem.type = selectedType.description
         do {
             try viewContext.save()
+            didSave = true
             name = ""
             author = ""
             recommender = ""
@@ -90,7 +136,31 @@ struct AddRecScreen: View {
             saveError = true
         }
     }
+
+    #if DEBUG
+    private func onRecommenderChange(_ recommender: String) {
+        switch recommender {
+        case "Keiko":
+            recDate = ISO8601DateFormatter().date(from: "2021-06-24T10:00:00+0000")!
+        case "Adam":
+            recDate = ISO8601DateFormatter().date(from: "2019-09-14T10:00:00+0000")!
+        case "Elijah":
+            recDate = ISO8601DateFormatter().date(from: "2020-05-29T10:00:00+0000")!
+        case "Alex":
+            recDate = ISO8601DateFormatter().date(from: "2020-10-17T10:00:00+0000")!
+        default:
+            break
+        }
+    }
+    #endif
 }
+
+private let itemFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .short
+    formatter.timeStyle = .none
+    return formatter
+}()
 
 struct AddRecScreen_Previews: PreviewProvider {
     static var previews: some View {

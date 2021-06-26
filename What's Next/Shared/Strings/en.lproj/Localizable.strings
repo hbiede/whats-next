@@ -1,0 +1,102 @@
+/* 
+  Strings.strings
+  What's Next
+
+  Created by Hundter Biede on 6/23/21.
+  Copyright © 2021 com.hbiede. All rights reserved.
+*/
+
+// Shared
+/* Movie Type - Title Case */
+"movie" = "Movie";
+/* TV Show Type - Title Case */
+"tvShow" = "TV Show";
+/* Book Type - Title Case */
+"book" = "Book";
+/* Movie Type - Start of Sentence Case */
+"movie-sentence-start" = "Movie";
+/* TV Show Type - Start of Sentence Case */
+"tvShow-sentence-start" = "TV show";
+/* Book Type - Start of Sentence Case */
+"book-sentence-start" = "Book";
+/* Movie Type - Mid-sentence Case */
+"movie-mid-sentence" = "movie";
+/* TV Show Type - Mid-sentence Case */
+"tvShow-mid-sentence" = "TV show";
+/* Book Type - Mid-sentence Case */
+"book-mid-sentence" = "book";
+
+/* Recommended by edit field label */
+"rec-by-field-label" = "Recommended by";
+/* Recommendation date edit field label */
+"rec-date-field-label" = "Recommended on";
+
+
+// Rec Details pages - Add Rec and Item Detail
+/* Title name for Add Recommendation screen */
+"add-rec-screen-title" = "Add Recommendation";
+/* Title name for Edit Recommendation screen */
+"edit-recommendation-page-title" = "Edit Recommendation";
+
+/* Author edit field label */
+"author-field-label" = "Author";
+/* Book title edit field label */
+"book-name-field-label" = "Book title";
+/* Confirm adding a record */
+"confirm-addition-button-label" = "Add";
+/* Delete a record */
+"delete-recommnedation-button" = "Delete";
+/* Message for when an entry failed to be added */
+"failed-save-message" = "Failed to save";
+/* Movie name edit field label */
+"movie-name-field-label" = "Movie name";
+/* Notes edit field label */
+"notes-field-label" = "Notes";
+/* Type selector label */
+"rec-type-label" = "Type";
+/* Save changes to a record */
+"save-change-button" = "Save";
+/* Message for when an entry is successfully added */
+"success-saved-message" = "Saved";
+/* TV Show name edit field label */
+"tv-show-name-field-label" = "TV show name";
+/* Undo all changes to a record */
+"undo-change-button" = "Undo";
+
+
+// List page
+/* Title name for Recommendation List screen */
+"recommendation-list-page-title" = "Recommendation List";
+/* The author of the book recommendation */
+"author-listing %@" = "Author: %@";
+/* The recommendation date */
+"recommendation-date-listing %@" = "Recommended on: %@";
+/* The person who recommended this entry */
+"recommender-listing %@" = "Recommended by: %@";
+
+
+// Main Menu page
+/* Button to get to the Add Recommendation page */
+"add-menu-button" = "Add";
+/* Main app screen title */
+"app-title" = "What's Next?";
+/* Button to get to the See List page */
+"see-list-menu-button" = "See List";
+/* Button to get to the Up Next page */
+"whats-next-menu-button" = "See What's Next";
+
+
+// Up Next page
+/* Title name for Up Next screen */
+"up-next-page-title" = "Up Next";
+
+/* The label for a recommended book's author */
+"author-label" = "Author";
+/* No books are entered for a random suggestion to be given */
+"no-book-records-text" = "No book records found";
+/* No movies are entered for a random suggestion to be given */
+"no-movie-records-text" = "No movie records found";
+/* No TV shows are entered for a random suggestion to be given */
+"no-tv-records-text" = "No TV Show records found";
+/* Button to allow the user to get a different recommendation */
+"refresh-button-label" = "Refresh";

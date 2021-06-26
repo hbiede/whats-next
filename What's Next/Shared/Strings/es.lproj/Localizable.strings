@@ -1,0 +1,103 @@
+/*
+  Strings.strings
+  What's Next
+
+  Created by Hundter Biede on 6/23/21.
+  Copyright © 2021 com.hbiede. All rights reserved.
+*/
+
+// Shared
+/* Movie Type - Title Case */
+"movie" = "Película";
+/* TV Show Type - Title Case */
+"tvShow" = "Programa de Televisión";
+/* Book Type - Title Case */
+"book" = "Libro";
+/* Movie Type - Start of Sentence Case */
+"movie-sentence-start" = "Película";
+/* TV Show Type - Start of Sentence Case */
+"tvShow-sentence-start" = "Programa de televisión";
+/* Book Type - Start of Sentence Case */
+"book-sentence-start" = "Libro";
+/* Movie Type - Mid-sentence Case */
+"movie-mid-sentence" = "una película";
+/* TV Show Type - Mid-sentence Case */
+"tvShow-mid-sentence" = "una programa de televisión";
+/* Book Type - Mid-sentence Case */
+"book-mid-sentence" = "un libro";
+/* Type selector label */
+"rec-type-label" = "Tipo";
+
+/* Recommended by edit field label */
+"rec-by-field-label" = "Recomendado por";
+/* Recommendation date edit field label */
+"rec-date-field-label" = "Fecha de recomendación";
+
+
+// Add Rec Screen
+/* Title name for Add Recommendation screen */
+"add-rec-screen-title" = "Agregar Recomendación";
+/* Title name for Edit Recommendation screen */
+"edit-recommendation-page-title" = "Editar Recommendation";
+
+/* Author edit field label */
+"author-field-label" = "Autor(a)";
+/* Book edit field label */
+"book-name-field-label" = "Titulo del libro";
+/* Confirm adding a record */
+"confirm-addition-button-label" = "Agregar";
+/* Delete a record */
+"delete-recommnedation-button" = "Eliminar";
+/* Message for when an entry failed to be added */
+"failed-save-message" = "Error al agregar";
+/* Movie name edit field label */
+"movie-name-field-label" = "Nombre de pelicula";
+/* Notes edit field label */
+"notes-field-label" = "Notas";
+/* Save changes to a record */
+"save-change-button" = "Salvar";
+/* Message for when an entry is successfully added */
+"success-saved-message" = "Salvado";
+/* TV Show name edit field label */
+"tv-show-name-field-label" = "Nombre del programa";
+/* Undo all changes to a record */
+"undo-change-button" = "Deshacer";
+
+
+// List page
+/* Title name for Recommendation List screen */
+"recommendation-list-page-title" = "Lista de Recomendaciones";
+
+/* The author of the book recommendation */
+"author-listing %@" = "Autor(a): %@";
+/* The recommendation date */
+"recommendation-date-listing %@" = "Fecha de recomendación: %@";
+/* The person who recommended this entry */
+"recommender-listing %@" = "Recomendado por: %@";
+
+
+// Main Menu page
+/* Button to get to the Add Recommendation page */
+"add-menu-button" = "Agregar";
+/* Main app screen title */
+"app-title" = "¿Que Proximo?";
+/* Button to get to the See List page */
+"see-list-menu-button" = "Ver Lista";
+/* Button to get to the Up Next page */
+"whats-next-menu-button" = "Ver Que Es Proximo";
+
+
+// Up Next page
+/* Title name for Up Next screen */
+"up-next-page-title" = "Proximo";
+
+/* The label for a recommended book's author */
+"author-label" = "Autor(a)";
+/* No books are entered for a random suggestion to be given */
+"no-book-records-text" = "No ha ingresado registros de libros";
+/* No movies are entered for a random suggestion to be given */
+"no-movie-records-text" = "No ha ingresado registros de películas";
+/* No TV shows are entered for a random suggestion to be given */
+"no-tv-records-text" = "No ha ingresado registros de programas de televisión";
+/* Button to allow the user to get a different recommendation */
+"refresh-button-label" = "Actualizar";

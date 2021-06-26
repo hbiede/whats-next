@@ -22,9 +22,9 @@ struct PersistenceController {
             newItem.recommendationDate = Date()
             newItem.recommender = "Recommender \(itemCounter)"
             if arc4random() < RAND_MAX {
-                newItem.type = "Movie" as String
+                newItem.type = "Movie"
             } else {
-                newItem.type = "Book" as String
+                newItem.type = "Book"
                 newItem.author = "Author \(itemCounter)"
             }
 
@@ -72,7 +72,6 @@ struct PersistenceController {
                 print(error.localizedDescription)
                 #endif
             }
-
         })
     }
 }

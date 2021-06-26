@@ -18,40 +18,69 @@ struct ItemListView: View {
 
     @ViewBuilder
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(items) { item in
-                    VStack {
-                        Text(item.name!)
-                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        if item.author != nil && item.author != "" {
-                            Text("By \(item.author!)")
+        List {
+            ForEach(items) { item in
+                if item.id != nil && item.name != nil {
+                    NavigationLink(destination: ItemDetailView(item: item)) {
+                        VStack {
+                            HStack {
+                                Text(item.name ?? "")
+                                    .fontWeight(.bold)
+                                    .frame(alignment: .leading)
+                                Text(NSLocalizedString(item.type ?? "", comment: "The name of the type"))
+                                    .fontWeight(.light)
+                                    .italic()
+                                    .frame(alignment: .leading)
+                                    .padding([.leading], 8)
+                            }
                                 .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.top, 0.5)
-                        }
-                        Text("Recommender: \(item.recommender!)")
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.top, 1)
-                        Text("Recommended on: \(item.recommendationDate!, formatter: itemFormatter)")
-                            .accessibilityLabel(
-                                "Recommended on: \(item.recommendationDate!, formatter: spokenItemFormatter)"
+                            if item.author != nil && item.author != "" {
+                                Text(
+                                    "author-listing \(item.author ?? "")",
+                                    comment: "The author of the book recommendation"
+                                )
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .padding(.top, 0.5)
+                            }
+                            Text(
+                                "recommender-listing \(item.recommender ?? "")",
+                                comment: "The person who recommended this entry"
                             )
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.top, 1)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.top, 1)
+                            Text(
+                                "recommendation-date-listing \(getRecDateString(item))",
+                                comment: "The recommendation date"
+                            )
+                                .accessibilityLabel(getRecDateString(item))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.top, 1)
+                        }
                     }
+                    #if os(iOS)
+                    .isDetailLink(true)
+                    #endif
                 }
-                .onDelete(perform: deleteItems)
             }
-            #if os(iOS)
-            .navigationBarHidden(true)
-            #endif
+            .onDelete(perform: deleteItems)
         }
-        .navigationTitle("Recommendations List")
         #if os(iOS)
-        .navigationBarTitleDisplayMode(.inline)
         .navigationViewStyle(StackNavigationViewStyle())
+        .toolbar {
+            NavigationLink(destination: AddRecScreen()) {
+                AnyView(
+                    Button(action: {}, label: {
+                        Image(systemName: "plus")
+                    })
+                )
+            }
+        }
         #endif
+        .navigationTitle("recommendation-list-page-title")
+    }
+
+    private func getRecDateString(_ item: Item) -> String {
+        spokenItemFormatter.string(from: item.recommendationDate ?? Date())
     }
 
     private func deleteItems(offsets: IndexSet) {
@@ -60,6 +89,7 @@ struct ItemListView: View {
 
             do {
                 try viewContext.save()
+                viewContext.reset()
             } catch {
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
@@ -67,13 +97,6 @@ struct ItemListView: View {
         }
     }
 }
-
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .none
-    return formatter
-}()
 
 private let spokenItemFormatter: DateFormatter = {
     let formatter = DateFormatter()
