@@ -42,7 +42,7 @@ class WhatsNextUITests: XCTestCase {
         tablesQuery.cells["Notes"].textFields["Notes"].tap()
         app.typeText("Emotional 🥲")
 
-        snapshot("AddRecommendation")
+        snapshot("2AddRecommendation")
 
         XCTAssertTrue(tablesQuery2.cells["Add"].otherElements.containing(.button, identifier: "Add").element.isEnabled)
         tablesQuery2.cells["Add"].otherElements.containing(.button, identifier: "Add").element.tap()
@@ -78,7 +78,7 @@ class WhatsNextUITests: XCTestCase {
         tablesQuery2.cells["Add"].otherElements.containing(.button, identifier: "Add").element.tap()
 
         app.navigationBars["Add Recommendation"].buttons["Back"].tap()
-        snapshot("MainMenu")
+        snapshot("4MainMenu")
 
         app.buttons["See What\'s Next"].tap()
         XCTAssertTrue(tablesQuery.staticTexts["Keiko"].exists)
@@ -105,11 +105,11 @@ class WhatsNextUITests: XCTestCase {
                 .element
                 .exists
         )
-        snapshot("Recommendation")
+        snapshot("1Recommendation")
 
         app.navigationBars["Up Next"].buttons["Back"].tap()
         app.buttons["See List"].tap()
-        snapshot("List")
+        snapshot("3List")
 
         // Clear entries
         tablesQuery.buttons["Toy Story 3, Movie, Recommended by: Keiko, June 24, 2021"].tap()
