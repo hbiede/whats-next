@@ -75,7 +75,6 @@ struct AddRecScreen: View {
                         NSLocalizedString("author-field-label", comment: "Author edit field label"),
                         text: $author
                     )
-                    TextField("author-field-label", text: $author)
                 } else {
                     TextField(
                         NSLocalizedString("tv-show-name-field-label", comment: "TV Show name edit field label"),
