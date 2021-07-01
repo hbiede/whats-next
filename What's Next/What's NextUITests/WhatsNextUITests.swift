@@ -1,8 +1,8 @@
 //
-//  What_s_NextUITests.swift
+//  WhatsNextUITests.swift
 //  What's NextUITests
 //
-//  Created by Elijah Biede on 6/22/21.
+//  Created by Hundter Biede on 6/22/21.
 //  Copyright © 2021 com.hbiede. All rights reserved.
 //
 
@@ -23,16 +23,13 @@ class WhatsNextUITests: XCTestCase {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         setupSnapshot(app)
-        app.launchArguments = ["testing"]
+        app.launchArguments += ["testing"]
         app.launch()
-
-        XCUIApplication().launch()
 
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         app.buttons["Add"].tap()
-        let tablesQuery2 = app.tables
-        let tablesQuery = tablesQuery2
+        let tablesQuery = app.tables
 
         tablesQuery.cells["Movie name"].textFields["Movie name"].tap()
         app.typeText("Toy Story 3")
@@ -44,38 +41,38 @@ class WhatsNextUITests: XCTestCase {
 
         snapshot("2AddRecommendation")
 
-        XCTAssertTrue(tablesQuery2.cells["Add"].otherElements.containing(.button, identifier: "Add").element.isEnabled)
-        tablesQuery2.cells["Add"].otherElements.containing(.button, identifier: "Add").element.tap()
+        XCTAssertTrue(tablesQuery.cells["Add"].otherElements.containing(.button, identifier: "Add").element.isEnabled)
+        tablesQuery.cells["Add"].otherElements.containing(.button, identifier: "Add").element.tap()
 
-        XCTAssertTrue(tablesQuery2.cells["Saved"].exists)
+        XCTAssertTrue(tablesQuery.cells["Saved"].exists)
 
         app.tables.buttons["TV Show"].tap()
-        XCTAssertTrue(tablesQuery2.cells["Saved"].exists)
+        XCTAssertTrue(tablesQuery.cells["Saved"].exists)
 
         tablesQuery.cells["TV show name"].textFields["TV show name"].tap()
         app.typeText("Breaking Bad")
-        XCTAssertFalse(tablesQuery2.cells["Saved"].exists)
-        print(tablesQuery2.cells["Add"].otherElements.containing(.button, identifier: "Add").element.isEnabled)
+        XCTAssertFalse(tablesQuery.cells["Saved"].exists)
+        print(tablesQuery.cells["Add"].otherElements.containing(.button, identifier: "Add").element.isEnabled)
         tablesQuery.cells["Recommended by"].textFields["Recommended by"].tap()
         app.typeText("Adam")
-        tablesQuery2.cells["Add"].otherElements.containing(.button, identifier: "Add").element.tap()
+        tablesQuery.cells["Add"].otherElements.containing(.button, identifier: "Add").element.tap()
 
         tablesQuery.cells["TV show name"].textFields["TV show name"].tap()
         app.typeText("Star Trek: TNG")
-        XCTAssertFalse(tablesQuery2.cells["Saved"].exists)
-        print(tablesQuery2.cells["Add"].otherElements.containing(.button, identifier: "Add").element.isEnabled)
+        XCTAssertFalse(tablesQuery.cells["Saved"].exists)
+        print(tablesQuery.cells["Add"].otherElements.containing(.button, identifier: "Add").element.isEnabled)
         tablesQuery.cells["Recommended by"].textFields["Recommended by"].tap()
         app.typeText("Elijah")
-        tablesQuery2.cells["Add"].otherElements.containing(.button, identifier: "Add").element.tap()
+        tablesQuery.cells["Add"].otherElements.containing(.button, identifier: "Add").element.tap()
 
         tablesQuery.cells["TV show name"].textFields["TV show name"].tap()
 
         app.typeText("Parks and Rec")
-        XCTAssertFalse(tablesQuery2.cells["Saved"].exists)
-        print(tablesQuery2.cells["Add"].otherElements.containing(.button, identifier: "Add").element.isEnabled)
+        XCTAssertFalse(tablesQuery.cells["Saved"].exists)
+        print(tablesQuery.cells["Add"].otherElements.containing(.button, identifier: "Add").element.isEnabled)
         tablesQuery.cells["Recommended by"].textFields["Recommended by"].tap()
         app.typeText("Alex")
-        tablesQuery2.cells["Add"].otherElements.containing(.button, identifier: "Add").element.tap()
+        tablesQuery.cells["Add"].otherElements.containing(.button, identifier: "Add").element.tap()
 
         app.navigationBars["Add Recommendation"].buttons["Back"].tap()
         snapshot("4MainMenu")
@@ -83,7 +80,7 @@ class WhatsNextUITests: XCTestCase {
         app.buttons["See What\'s Next"].tap()
         XCTAssertTrue(tablesQuery.staticTexts["Keiko"].exists)
         XCTAssertFalse(
-            tablesQuery2
+            tablesQuery
                 .cells["Refresh"]
                 .otherElements
                 .containing(.button, identifier: "Refresh")
@@ -98,7 +95,7 @@ class WhatsNextUITests: XCTestCase {
             tablesQuery.staticTexts["Alex"].exists
         )
         XCTAssertTrue(
-            tablesQuery2
+            tablesQuery
                 .cells["Refresh"]
                 .otherElements
                 .containing(.button, identifier: "Refresh")

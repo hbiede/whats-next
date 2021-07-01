@@ -21,6 +21,9 @@
 		C325E1472683BEE400067AF1 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C325E1462683BEE400067AF1 /* SnapshotHelper.swift */; };
 		C33439AF2683DE9400A8F4CB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C33439B22683DE9400A8F4CB /* Localizable.strings */; };
 		C33439B02683DE9400A8F4CB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C33439B22683DE9400A8F4CB /* Localizable.strings */; };
+		C356AA60268D609E0050E32A /* Filterer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C356AA5F268D609E0050E32A /* Filterer.swift */; };
+		C356AA61268D609E0050E32A /* Filterer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C356AA5F268D609E0050E32A /* Filterer.swift */; };
+		C356AA67268D71130050E32A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C33439B22683DE9400A8F4CB /* Localizable.strings */; };
 		C3708518268155CB0029CC3E /* WhatsNextApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C8A824267C1CD1007D9512 /* WhatsNextApp.swift */; };
 		C3C8A84E267C1CD2007D9512 /* What_s_Next.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C3C8A822267C1CD1007D9512 /* What_s_Next.xcdatamodeld */; };
 		C3C8A84F267C1CD2007D9512 /* What_s_Next.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C3C8A822267C1CD1007D9512 /* What_s_Next.xcdatamodeld */; };
@@ -54,6 +57,7 @@
 		C325E1462683BEE400067AF1 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		C33439B12683DE9400A8F4CB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C33439B52683E31900A8F4CB /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C356AA5F268D609E0050E32A /* Filterer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filterer.swift; sourceTree = "<group>"; };
 		C3C8A823267C1CD1007D9512 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		C3C8A824267C1CD1007D9512 /* WhatsNextApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNextApp.swift; sourceTree = "<group>"; };
 		C3C8A825267C1CD1007D9512 /* ItemListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListView.swift; sourceTree = "<group>"; };
@@ -139,6 +143,7 @@
 				C33439B42683E2D100A8F4CB /* Strings */,
 				C322EFC7267C32AE00D42C86 /* Screens */,
 				C3C8A826267C1CD1007D9512 /* Persistence.swift */,
+				C356AA5F268D609E0050E32A /* Filterer.swift */,
 				C3C8A827267C1CD1007D9512 /* Assets.xcassets */,
 				C3C8A822267C1CD1007D9512 /* What_s_Next.xcdatamodeld */,
 				C3C8A824267C1CD1007D9512 /* WhatsNextApp.swift */,
@@ -279,6 +284,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C356AA67268D71130050E32A /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +346,7 @@
 				C322EFC9267C32CD00D42C86 /* MainScreenView.swift in Sources */,
 				C322EFCC267C4A1900D42C86 /* AddRecScreen.swift in Sources */,
 				C325E14226838CA300067AF1 /* ItemDetailView.swift in Sources */,
+				C356AA60268D609E0050E32A /* Filterer.swift in Sources */,
 				C322EFCF267C4A4A00D42C86 /* UpNextScreen.swift in Sources */,
 				C3C8A854267C1CD2007D9512 /* Persistence.swift in Sources */,
 				C3C8A84E267C1CD2007D9512 /* What_s_Next.xcdatamodeld in Sources */,
@@ -356,6 +363,7 @@
 				C322EFCD267C4A1900D42C86 /* AddRecScreen.swift in Sources */,
 				C322EFD0267C4A4A00D42C86 /* UpNextScreen.swift in Sources */,
 				C325E14326838CA300067AF1 /* ItemDetailView.swift in Sources */,
+				C356AA61268D609E0050E32A /* Filterer.swift in Sources */,
 				C3C8A855267C1CD2007D9512 /* Persistence.swift in Sources */,
 				C3708518268155CB0029CC3E /* WhatsNextApp.swift in Sources */,
 				C3C8A84F267C1CD2007D9512 /* What_s_Next.xcdatamodeld in Sources */,

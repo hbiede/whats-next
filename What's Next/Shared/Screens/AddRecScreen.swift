@@ -137,6 +137,9 @@ struct AddRecScreen: View {
     }
 
     #if DEBUG
+    /**
+     * Used for creating varying screenshots
+     */
     private func onRecommenderChange(_ recommender: String) {
         switch recommender {
         case "Keiko":
