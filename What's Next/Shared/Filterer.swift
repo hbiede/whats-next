@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-func sortItems(items: [Item], sortMethod: String) -> Dictionary<String, [Item]> {
+func sortItems(items: [Item], sortMethod: String) -> [String: [Item]] {
     var result: [String : [Item]] = [:]
     items.forEach { item in
         if item.type != nil {

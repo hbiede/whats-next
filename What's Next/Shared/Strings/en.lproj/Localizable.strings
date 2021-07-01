@@ -100,3 +100,29 @@
 "no-tv-records-text" = "No TV Show records found";
 /* Button to allow the user to get a different recommendation */
 "refresh-button-label" = "Refresh";
+
+// Screenshots
+/* Who recommender Breaking Bad */
+"breaking-bad-recommender" = "Adam";
+/* Breaking Bad title */
+"breaking-bad-title" = "Breaking Bad";
+/* Who recommender Parks and Rec */
+"parks-and-rec-recommender" = "Alex";
+/* Parks and Rec title */
+"parks-and-rec-title" = "Parks and Rec";
+/* Who recommender Star Trek */
+"star-trek-recommender" = "Elijah";
+/* Star Trek title */
+"star-trek-title" = "Star Trek: TNG";
+/* Toy Story notes */
+"toy-story-notes" = "Emotional 🥲";
+/* Who recommender Toy Story */
+"toy-story-recommender" = "Keiko";
+/* Toy Story title */
+"toy-story-title" = "Toy Story 3";
+
+// App Store
+/* The title in the App Store (30 character max) */
+"app-store-title" = "What's Next - Recommendations";
+/* The subtitle in the App Store (30 character max) */
+"app-store-subtitle" = "Track Media Recommendations";

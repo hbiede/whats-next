@@ -142,13 +142,13 @@ struct AddRecScreen: View {
      */
     private func onRecommenderChange(_ recommender: String) {
         switch recommender {
-        case "Keiko":
+        case NSLocalizedString("toy-story-recommender", comment: "Who recommender Toy Story"):
             recDate = ISO8601DateFormatter().date(from: "2021-06-24T10:00:00+0000")!
-        case "Adam":
+        case NSLocalizedString("breaking-bad-recommender", comment: "Who recommender Breaking Bad"):
             recDate = ISO8601DateFormatter().date(from: "2019-09-14T10:00:00+0000")!
-        case "Elijah":
+        case NSLocalizedString("star-trek-recommender", comment: "Who recommender Star Trek"):
             recDate = ISO8601DateFormatter().date(from: "2020-05-29T10:00:00+0000")!
-        case "Alex":
+        case NSLocalizedString("parks-and-rec-recommender", comment: "Who recommender Parks and Rec"):
             recDate = ISO8601DateFormatter().date(from: "2020-10-17T10:00:00+0000")!
         default:
             break

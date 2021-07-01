@@ -20,7 +20,7 @@ struct ItemListView: View {
     var body: some View {
         List {
             ForEach(
-                sortItems(items: items.filter { _ in true }, sortMethod: "type").sorted{ $0.key < $1.key },
+                sortItems(items: items.filter { _ in true }, sortMethod: "type").sorted { $0.key < $1.key },
                 id: \.key
             ) { (sectionKey, sectionItems) in
                 Section(header: Text(NSLocalizedString(sectionKey, comment: "The name of the type"))) {
@@ -77,7 +77,7 @@ struct ContentView_Previews: PreviewProvider {
 
 struct ItemListEntry: View {
     let item: Item
-    
+
     @ViewBuilder
     var body: some View {
         VStack {
@@ -115,7 +115,7 @@ struct ItemListEntry: View {
                 .padding(.top, 1)
         }
     }
-    
+
     private func getRecDateString(_ item: Item) -> String {
         spokenItemFormatter.string(from: item.recommendationDate ?? Date())
     }

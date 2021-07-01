@@ -16,6 +16,7 @@ struct ItemDetailView: View {
     }
 
     @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     @State private var name: String = ""
     @State private var author: String = ""
@@ -162,6 +163,7 @@ struct ItemDetailView: View {
             try viewContext.save()
         } catch {}
         viewContext.reset()
+        self.presentationMode.wrappedValue.dismiss()
     }
 
     func undo() {

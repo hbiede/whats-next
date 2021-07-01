@@ -31,6 +31,10 @@ func snapshot(_ name: String, waitForLoadingIndicator: Bool) {
     }
 }
 
+func getLanguage() -> String {
+    return Snapshot.getLanguage()
+}
+
 /// - Parameters:
 ///   - name: The name of the snapshot
 ///   - timeout: Amount of seconds to wait until the network loading indicator disappears. Pass `0` if you don't want to wait.
@@ -74,6 +78,23 @@ open class Snapshot: NSObject {
             setLaunchArguments(app)
         } catch let error {
             NSLog(error.localizedDescription)
+        }
+    }
+
+    open class func getLanguage() -> String {
+        guard let cacheDirectory = self.cacheDirectory else {
+            NSLog("CacheDirectory is not set - probably running on a physical device?")
+            return ""
+        }
+
+        let path = cacheDirectory.appendingPathComponent("language.txt")
+
+        do {
+            let trimCharacterSet = CharacterSet.whitespacesAndNewlines
+            return try String(contentsOf: path, encoding: .utf8).trimmingCharacters(in: trimCharacterSet)
+        } catch {
+            NSLog("Couldn't detect/set language...")
+            return ""
         }
     }
 

@@ -23,111 +23,223 @@ class WhatsNextUITests: XCTestCase {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         setupSnapshot(app)
-        app.launchArguments += ["testing"]
         app.launch()
+
+        let lang = getLanguage()
+        UserDefaults.standard.set(lang, forKey: "i18n_language")
+        UserDefaults.standard.set(lang, forKey: "app_lang")
+
+        let bundle = Bundle(path: Bundle(for: type(of: self)).path(forResource: lang, ofType: "lproj")!)!
 
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-        app.buttons["Add"].tap()
+        app.buttons[NSLocalizedString("add-menu-button", bundle: bundle, comment: "")].tap()
         let tablesQuery = app.tables
 
-        tablesQuery.cells["Movie name"].textFields["Movie name"].tap()
-        app.typeText("Toy Story 3")
-        tablesQuery.cells["Recommended by"].textFields["Recommended by"].tap()
-        app.typeText("Keiko")
+        tablesQuery.cells[
+            NSLocalizedString("movie-name-field-label", bundle: bundle, comment: "Movie name edit field label")
+        ].textFields[
+            NSLocalizedString("movie-name-field-label", bundle: bundle, comment: "Movie name edit field label")
+        ].tap()
+        app.typeText(
+            NSLocalizedString("toy-story-title", bundle: bundle, comment: "Toy Story title")
+        )
+        tablesQuery.cells[
+            NSLocalizedString("rec-by-field-label", bundle: bundle, comment: "Recommended by edit field label")
+        ].textFields[
+            NSLocalizedString("rec-by-field-label", bundle: bundle, comment: "Recommended by edit field label")
+        ].tap()
+        app.typeText(
+            NSLocalizedString("toy-story-recommender", bundle: bundle, comment: "Who recommender Toy Story")
+        )
 
-        tablesQuery.cells["Notes"].textFields["Notes"].tap()
-        app.typeText("Emotional 🥲")
+        tablesQuery.cells[
+            NSLocalizedString("notes-field-label", bundle: bundle, comment: "Notes edit field label")
+        ].textFields[
+            NSLocalizedString("notes-field-label", bundle: bundle, comment: "Notes edit field label")
+        ].tap()
+        app.typeText(
+            NSLocalizedString("toy-story-notes", bundle: bundle, comment: "Toy Story notes")
+        )
 
         snapshot("2AddRecommendation")
 
-        XCTAssertTrue(tablesQuery.cells["Add"].otherElements.containing(.button, identifier: "Add").element.isEnabled)
-        tablesQuery.cells["Add"].otherElements.containing(.button, identifier: "Add").element.tap()
+        XCTAssertTrue(tablesQuery.cells[
+            NSLocalizedString("confirm-addition-button-label", bundle: bundle, comment: "")
+        ].otherElements.containing(
+            .button,
+            identifier: NSLocalizedString("confirm-addition-button-label", bundle: bundle, comment: "")
+        ).element.isEnabled)
+        tablesQuery.cells[
+            NSLocalizedString("confirm-addition-button-label", bundle: bundle, comment: "")
+        ].otherElements.containing(
+            .button,
+            identifier: NSLocalizedString("confirm-addition-button-label", bundle: bundle, comment: "")
+        ).element.tap()
 
-        XCTAssertTrue(tablesQuery.cells["Saved"].exists)
+        XCTAssertTrue(tablesQuery.cells[
+            NSLocalizedString("success-saved-message", bundle: bundle, comment: "")
+        ].exists)
 
-        app.tables.buttons["TV Show"].tap()
-        XCTAssertTrue(tablesQuery.cells["Saved"].exists)
+        app.tables.buttons[NSLocalizedString("tvShow", bundle: bundle, comment: "")].tap()
+        XCTAssertTrue(tablesQuery.cells[
+            NSLocalizedString("success-saved-message", bundle: bundle, comment: "")
+        ].exists)
 
-        tablesQuery.cells["TV show name"].textFields["TV show name"].tap()
-        app.typeText("Breaking Bad")
-        XCTAssertFalse(tablesQuery.cells["Saved"].exists)
-        print(tablesQuery.cells["Add"].otherElements.containing(.button, identifier: "Add").element.isEnabled)
-        tablesQuery.cells["Recommended by"].textFields["Recommended by"].tap()
-        app.typeText("Adam")
-        tablesQuery.cells["Add"].otherElements.containing(.button, identifier: "Add").element.tap()
+        tablesQuery.cells[
+            NSLocalizedString("tv-show-name-field-label", bundle: bundle, comment: "")
+        ].textFields[
+            NSLocalizedString("tv-show-name-field-label", bundle: bundle, comment: "")
+        ].tap()
+        app.typeText(
+            NSLocalizedString("breaking-bad-title", bundle: bundle, comment: "Breaking Bad title")
+        )
+        XCTAssertFalse(tablesQuery.cells[
+            NSLocalizedString("success-saved-message", bundle: bundle, comment: "")
+        ].exists)
+        tablesQuery.cells[
+            NSLocalizedString("rec-by-field-label", bundle: bundle, comment: "Recommended by edit field label")
+        ].textFields[
+            NSLocalizedString("rec-by-field-label", bundle: bundle, comment: "Recommended by edit field label")
+        ].tap()
+        app.typeText(
+            NSLocalizedString("breaking-bad-recommender", bundle: bundle, comment: "Who recommender Breaking Bad")
+        )
+        tablesQuery.cells[
+            NSLocalizedString("confirm-addition-button-label", bundle: bundle, comment: "")
+        ].otherElements.containing(
+            .button,
+            identifier: NSLocalizedString("confirm-addition-button-label", bundle: bundle, comment: "")
+        ).element.tap()
 
-        tablesQuery.cells["TV show name"].textFields["TV show name"].tap()
-        app.typeText("Star Trek: TNG")
-        XCTAssertFalse(tablesQuery.cells["Saved"].exists)
-        print(tablesQuery.cells["Add"].otherElements.containing(.button, identifier: "Add").element.isEnabled)
-        tablesQuery.cells["Recommended by"].textFields["Recommended by"].tap()
-        app.typeText("Elijah")
-        tablesQuery.cells["Add"].otherElements.containing(.button, identifier: "Add").element.tap()
+        tablesQuery.cells[
+            NSLocalizedString("tv-show-name-field-label", bundle: bundle, comment: "")
+        ].textFields[
+            NSLocalizedString("tv-show-name-field-label", bundle: bundle, comment: "")
+        ].tap()
+        app.typeText(
+            NSLocalizedString("star-trek-title", bundle: bundle, comment: "Star Trek title")
+        )
+        XCTAssertFalse(
+            tablesQuery.cells[NSLocalizedString("success-saved-message", bundle: bundle, comment: "")].exists
+        )
+        tablesQuery.cells[
+            NSLocalizedString("rec-by-field-label", bundle: bundle, comment: "Recommended by edit field label")
+        ].textFields[
+            NSLocalizedString("rec-by-field-label", bundle: bundle, comment: "Recommended by edit field label")
+        ].tap()
+        app.typeText(
+            NSLocalizedString("star-trek-recommender", bundle: bundle, comment: "Who recommender Star Trek")
+        )
+        tablesQuery.cells[
+            NSLocalizedString("confirm-addition-button-label", bundle: bundle, comment: "")
+        ].otherElements.containing(
+            .button,
+            identifier: NSLocalizedString("confirm-addition-button-label", bundle: bundle, comment: "")
+        ).element.tap()
 
-        tablesQuery.cells["TV show name"].textFields["TV show name"].tap()
+        tablesQuery.cells[
+            NSLocalizedString("tv-show-name-field-label", bundle: bundle, comment: "")
+        ].textFields[
+            NSLocalizedString("tv-show-name-field-label", bundle: bundle, comment: "")
+        ].tap()
 
-        app.typeText("Parks and Rec")
-        XCTAssertFalse(tablesQuery.cells["Saved"].exists)
-        print(tablesQuery.cells["Add"].otherElements.containing(.button, identifier: "Add").element.isEnabled)
-        tablesQuery.cells["Recommended by"].textFields["Recommended by"].tap()
-        app.typeText("Alex")
-        tablesQuery.cells["Add"].otherElements.containing(.button, identifier: "Add").element.tap()
+        app.typeText(
+            NSLocalizedString("parks-and-rec-title", bundle: bundle, comment: "Parks and Rec title")
+        )
+        XCTAssertFalse(tablesQuery.cells[
+            NSLocalizedString("success-saved-message", bundle: bundle, comment: "")
+        ].exists)
+        tablesQuery.cells[
+            NSLocalizedString("rec-by-field-label", bundle: bundle, comment: "Recommended by edit field label")
+        ].textFields[
+            NSLocalizedString("rec-by-field-label", bundle: bundle, comment: "Recommended by edit field label")
+        ].tap()
+        app.typeText(
+            NSLocalizedString("parks-and-rec-recommender", bundle: bundle, comment: "Who recommender Parks and Rec")
+        )
+        tablesQuery.cells[
+            NSLocalizedString("confirm-addition-button-label", bundle: bundle, comment: "")
+        ].otherElements.containing(
+            .button,
+            identifier: NSLocalizedString("confirm-addition-button-label", bundle: bundle, comment: "")
+        ).element.tap()
 
-        app.navigationBars["Add Recommendation"].buttons["Back"].tap()
+        app.navigationBars[
+            NSLocalizedString("add-rec-screen-title", bundle: bundle, comment: "")
+        ].buttons.firstMatch.tap()
         snapshot("4MainMenu")
 
-        app.buttons["See What\'s Next"].tap()
-        XCTAssertTrue(tablesQuery.staticTexts["Keiko"].exists)
+        app.buttons[NSLocalizedString("whats-next-menu-button", bundle: bundle, comment: "")].tap()
+        XCTAssertTrue(tablesQuery.staticTexts[
+            NSLocalizedString("toy-story-recommender", bundle: bundle, comment: "Who recommender Toy Story")
+        ].exists)
         XCTAssertFalse(
             tablesQuery
-                .cells["Refresh"]
+                .cells[NSLocalizedString("refresh-button-label", bundle: bundle, comment: "")]
                 .otherElements
-                .containing(.button, identifier: "Refresh")
+                .containing(
+                    .button,
+                    identifier: NSLocalizedString("refresh-button-label", bundle: bundle, comment: "")
+                )
                 .element
                 .exists
         )
 
-        app.tables.buttons["TV Show"].tap()
+        app.tables.buttons[NSLocalizedString("tvShow", bundle: bundle, comment: "Who recommender Toy Story")].tap()
         XCTAssertTrue(
-            tablesQuery.staticTexts["Adam"].exists ||
-            tablesQuery.staticTexts["Elijah"].exists ||
-            tablesQuery.staticTexts["Alex"].exists
+            tablesQuery.staticTexts[
+                NSLocalizedString("breaking-bad-recommender", bundle: bundle, comment: "Who recommender Breaking Bad")
+            ].exists ||
+            tablesQuery.staticTexts[
+                NSLocalizedString("star-trek-recommender", bundle: bundle, comment: "Who recommender Star Trek")
+            ].exists ||
+            tablesQuery.staticTexts[
+                NSLocalizedString("parks-and-rec-recommender", bundle: bundle, comment: "Who recommender Parks and Rec")
+            ].exists
         )
         XCTAssertTrue(
             tablesQuery
-                .cells["Refresh"]
+                .cells[NSLocalizedString("refresh-button-label", bundle: bundle, comment: "")]
                 .otherElements
-                .containing(.button, identifier: "Refresh")
+                .containing(
+                    .button,
+                    identifier: NSLocalizedString("refresh-button-label", bundle: bundle, comment: "")
+                )
                 .element
                 .exists
         )
         snapshot("1Recommendation")
 
-        app.navigationBars["Up Next"].buttons["Back"].tap()
-        app.buttons["See List"].tap()
+        app.navigationBars[
+            NSLocalizedString("up-next-page-title", bundle: bundle, comment: "")
+        ].buttons.firstMatch.tap()
+        app.buttons[
+            NSLocalizedString("see-list-menu-button", bundle: bundle, comment: "")
+        ].tap()
         snapshot("3List")
 
         // Clear entries
-        tablesQuery.buttons["Toy Story 3, Movie, Recommended by: Keiko, June 24, 2021"].tap()
-        tablesQuery.buttons["Delete"].tap()
-        tablesQuery.buttons["Breaking Bad, TV Show, Recommended by: Adam, September 14, 2019"].tap()
-        tablesQuery.buttons["Delete"].tap()
-        tablesQuery.buttons["Star Trek: TNG, TV Show, Recommended by: Elijah, May 29, 2020"].tap()
-        tablesQuery.buttons["Delete"].tap()
-        tablesQuery.buttons["Parks and Rec, TV Show, Recommended by: Alex, October 17, 2020"].tap()
-        tablesQuery.buttons["Delete"].tap()
+        tablesQuery.buttons.firstMatch.tap()
+        tablesQuery.buttons[NSLocalizedString("delete-recommnedation-button", bundle: bundle, comment: "")].tap()
+        tablesQuery.buttons.firstMatch.tap()
+        tablesQuery.buttons[NSLocalizedString("delete-recommnedation-button", bundle: bundle, comment: "")].tap()
+        tablesQuery.buttons.firstMatch.tap()
+        tablesQuery.buttons[NSLocalizedString("delete-recommnedation-button", bundle: bundle, comment: "")].tap()
+        tablesQuery.buttons.firstMatch.tap()
+        tablesQuery.buttons[NSLocalizedString("delete-recommnedation-button", bundle: bundle, comment: "")].tap()
     }
     // swiftlint:enable function_body_length
 
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
-    }
+    // Uncomment when not using as a snapshot scheme
+//    func testLaunchPerformance() throws {
+//        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
+//            // This measures how long it takes to launch your application.
+//            measure(metrics: [XCTApplicationLaunchMetric()]) {
+//                XCUIApplication().launch()
+//            }
+//        }
+//    }
 
     private let itemFormatter: DateFormatter = {
         let formatter = DateFormatter()

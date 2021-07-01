@@ -67,7 +67,6 @@
 // List page
 /* Title name for Recommendation List screen */
 "recommendation-list-page-title" = "Lista de Recomendaciones";
-
 /* The author of the book recommendation */
 "author-listing %@" = "Autor(a): %@";
 /* The recommendation date */
@@ -80,16 +79,16 @@
 /* Button to get to the Add Recommendation page */
 "add-menu-button" = "Agregar";
 /* Main app screen title */
-"app-title" = "¿Que Proximo?";
+"app-title" = "¿Que Próximo?";
 /* Button to get to the See List page */
 "see-list-menu-button" = "Ver Lista";
 /* Button to get to the Up Next page */
-"whats-next-menu-button" = "Ver Que Es Proximo";
+"whats-next-menu-button" = "Ver Que Es Próximo";
 
 
 // Up Next page
 /* Title name for Up Next screen */
-"up-next-page-title" = "Proximo";
+"up-next-page-title" = "Próximo";
 
 /* The label for a recommended book's author */
 "author-label" = "Autor(a)";
@@ -101,3 +100,29 @@
 "no-tv-records-text" = "No ha ingresado registros de programas de televisión";
 /* Button to allow the user to get a different recommendation */
 "refresh-button-label" = "Actualizar";
+
+// Screenshots
+/* Who recommender Breaking Bad */
+"breaking-bad-recommender" = "Adán";
+/* Breaking Bad title */
+"breaking-bad-title" = "Breaking Bad";
+/* Who recommender Parks and Rec */
+"parks-and-rec-recommender" = "Alex";
+/* Parks and Rec title */
+"parks-and-rec-title" = "Parks and Rec";
+/* Who recommender Star Trek */
+"star-trek-recommender" = "Elias";
+/* Star Trek title */
+"star-trek-title" = "Star Trek: TNG";
+/* Toy Story notes */
+"toy-story-notes" = "Emocional 🥲";
+/* Who recommender Toy Story */
+"toy-story-recommender" = "Keiko";
+/* Toy Story title */
+"toy-story-title" = "Toy Story 3";
+
+// App Store
+/* The title in the App Store (30 character max) */
+"app-store-title" = "¿Que Próximo?: Recomendaciones";
+/* The subtitle in the App Store (30 character max) */
+"app-store-subtitle" = "Rastrear las recomendaciones";
