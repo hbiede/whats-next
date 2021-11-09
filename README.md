@@ -10,7 +10,7 @@ Coming to the Apple App Store in Fall 2021.
 
 | Step | Image |
 | :-------- | ----- |
-| Menu | <img src="What's%20Next/screenshots/en-US/iPhone%2012%20Pro%20Max-4MainMenu.png" height=250/> |
-| Add Recommendation | <img src="What's%20Next/screenshots/en-US/iPhone%2012%20Pro%20Max-2AddRecommendation.png" height=250/> |
-| Get Random Recommendation | <img src="What's%20Next/screenshots/en-US/iPhone%2012%20Pro%20Max-1Recommendation.png" height=250/> |
-| See List | <img src="What's%20Next/screenshots/en-US/iPhone%2012%20Pro%20Max-3List.png" height=250/> |
+| Menu | <img src="What's%20Next/screenshots/en/iPhone%2012%20Pro%20Max-4MainMenu.png" height=250/> |
+| Add Recommendation | <img src="What's%20Next/screenshots/en/iPhone%2012%20Pro%20Max-2AddRecommendation.png" height=250/> |
+| Get Random Recommendation | <img src="What's%20Next/screenshots/en/iPhone%2012%20Pro%20Max-1Recommendation.png" height=250/> |
+| See List | <img src="What's%20Next/screenshots/en/iPhone%2012%20Pro%20Max-3List.png" height=250/> |
