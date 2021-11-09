@@ -4,7 +4,7 @@ Easily track book, movie, and TV show recommendations from your friends. Then, e
 see these recommendations as a list, or get a random selection for the media type in which 
 you're looking for the next thing you will enjoy.
 
-Coming to the Apple App Store in Fall 2021.
+Available on the [Apple App Store](https://apps.apple.com/us/app/whats-next-recommendations/id1573645822).
 
 ## Screenshots
 
