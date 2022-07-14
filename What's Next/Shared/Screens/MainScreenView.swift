@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct MainScreenView: View {
+    @Environment(\.scenePhase) private var phase
     @Environment(\.managedObjectContext) private var viewContext
+    @EnvironmentObject var quickActionSettings: QuickActionSettings
 
     @FetchRequest(sortDescriptors: [])
     private var items: FetchedResults<Item>
@@ -19,8 +21,8 @@ struct MainScreenView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                AnimatedBackground()
-
+                Background()
+                
                 VStack {
                     Spacer()
                     Text("app-title", comment: "Main app screen title")
@@ -30,7 +32,11 @@ struct MainScreenView: View {
                         .multilineTextAlignment(.center)
                     Spacer()
                     Spacer()
-                    NavigationLink(destination: UpNextScreen().environment(\.managedObjectContext, viewContext)) {
+                    NavigationLink(
+                        destination: UpNextScreen().environment(\.managedObjectContext, viewContext),
+                        tag: QuickActionSettings.ShortcutAction.GET_REC,
+                        selection: $quickActionSettings.quickAction
+                    ) {
                         Text("whats-next-menu-button", comment: "Button to get to the Up Next page")
                             .font(.largeTitle)
                             .fontWeight(.bold)
@@ -39,13 +45,17 @@ struct MainScreenView: View {
                             .padding()
                             .padding(.horizontal, 10)
                             .background(Color.white)
-
+                        
                     }
-                        .clipShape(Capsule())
-                        .padding(.bottom, 10)
-                        .opacity(items.isEmpty ? 0.4 : 1)
-                        .disabled(items.isEmpty)
-                    NavigationLink(destination: AddRecScreen()) {
+                    .clipShape(Capsule())
+                    .padding(.bottom, 10)
+                    .opacity(items.isEmpty ? 0.4 : 1)
+                    .disabled(items.isEmpty)
+                    NavigationLink(
+                        destination: AddRecScreen(),
+                        tag: QuickActionSettings.ShortcutAction.ADD_REC,
+                        selection: $quickActionSettings.quickAction
+                    ) {
                         Text("add-menu-button", comment: "Button to get to the Add Recommendation page")
                             .font(.title)
                             .fontWeight(.semibold)
@@ -54,11 +64,15 @@ struct MainScreenView: View {
                             .padding()
                             .padding(.horizontal, 20)
                             .background(Color.white)
-
+                        
                     }
-                        .clipShape(Capsule())
-                        .padding(.bottom, 10)
-                    NavigationLink(destination: ItemListView().environment(\.managedObjectContext, viewContext)) {
+                    .clipShape(Capsule())
+                    .padding(.bottom, 10)
+                    NavigationLink(
+                        destination: ItemListView().environment(\.managedObjectContext, viewContext),
+                        tag: QuickActionSettings.ShortcutAction.SHOW_LIST,
+                        selection: $quickActionSettings.quickAction
+                    ) {
                         Text("see-list-menu-button", comment: "Button to get to the See List page")
                             .font(.title)
                             .fontWeight(.semibold)
@@ -67,27 +81,74 @@ struct MainScreenView: View {
                             .padding()
                             .padding(.horizontal, 20)
                             .background(Color.white)
-
+                        
                     }
-                        .clipShape(Capsule())
-                        .opacity(items.isEmpty ? 0.4 : 1)
-                        .disabled(items.isEmpty)
+                    .clipShape(Capsule())
+                    .opacity(items.isEmpty ? 0.4 : 1)
+                    .disabled(items.isEmpty)
                     Spacer()
                 }
             }
         }
-            #if os(iOS)
-            .navigationViewStyle(StackNavigationViewStyle())
-            #endif
+        #if os(iOS)
+        .navigationViewStyle(StackNavigationViewStyle())
+        #endif
+        .onChange(of: phase) { newPhase in
+            switch newPhase {
+            case .active:
+                print("skipping active")
+            case .inactive, .background:
+                print("inactive")
+                addQuickActions()
+            @unknown default:
+                print(newPhase)
+            }
+        }
+    }
+    
+    func addQuickActions() {
+        var shortcutItems: [UIApplicationShortcutItem] = [
+            UIApplicationShortcutItem(
+                type: QuickActionSettings.ShortcutAction.ADD_REC.rawValue,
+                localizedTitle: NSLocalizedString(
+                    "add-rec-title",
+                    comment: "Add a recommendation from the home screen"
+                ),
+                localizedSubtitle: nil,
+                icon: UIApplicationShortcutIcon(systemImageName: "plus.square.on.square")
+            )
+        ]
+        if items.count > 0 {
+            shortcutItems.append(
+                UIApplicationShortcutItem(
+                    type: QuickActionSettings.ShortcutAction.SHOW_LIST.rawValue,
+                    localizedTitle: NSLocalizedString(
+                        "show-list-title",
+                        comment: "Show all recommendations from the home screen"
+                    ),
+                    localizedSubtitle: nil,
+                    icon: UIApplicationShortcutIcon(systemImageName: "list.star")
+                )
+            )
+            shortcutItems.append(
+                UIApplicationShortcutItem(
+                    type: QuickActionSettings.ShortcutAction.GET_REC.rawValue,
+                    localizedTitle: NSLocalizedString(
+                        "get-rec-title",
+                        comment: "Get a random recommendation from the home screen"
+                    ),
+                    localizedSubtitle: nil,
+                    icon: UIApplicationShortcutIcon(systemImageName: "lightbulb.fill")
+                )
+            )
+        }
+        UIApplication.shared.shortcutItems = shortcutItems
     }
 }
 
-struct AnimatedBackground: View {
+struct Background: View {
     @Environment(\.accessibilityReduceMotion) var reduceMotion
 
-    @State var rotation = 0.0
-
-    let timer = Timer.publish(every: 1, on: .main, in: .default).autoconnect()
     let colors = [
         .accentColor,
         Color.init(red: 0.75862745, green: 0.27058824, blue: 1),
@@ -96,12 +157,11 @@ struct AnimatedBackground: View {
     ]
 
     var body: some View {
-        AngularGradient(colors: colors, center: UnitPoint(x: 4, y: 0), angle: .degrees(self.rotation))
-            .onReceive(timer, perform: { _ in
-                withAnimation {
-                    self.rotation = (self.rotation + (reduceMotion ? 1 : 5)).truncatingRemainder(dividingBy: 360)
-                }
-            })
+        AngularGradient(
+            colors: colors,
+            center: UnitPoint(x: 4, y: 0),
+            angle: .degrees(Double.random(in: 0...360))
+        )
             .ignoresSafeArea()
     }
 }
@@ -109,5 +169,6 @@ struct AnimatedBackground: View {
 struct MainScreenView_Previews: PreviewProvider {
     static var previews: some View {
         MainScreenView()
+            .environmentObject(QuickActionSettings())
     }
 }

@@ -126,3 +126,12 @@
 "app-store-title" = "What's Next - Recommendations";
 /* The subtitle in the App Store (30 character max) */
 "app-store-subtitle" = "Track Media Recommendations";
+
+// Home Screen Quick Actions
+/* Add a recommendation from the home screen */
+"add-rec-title" = "Add Recommendation";
+/* Show all recommendations from the home screen */
+"show-list-title" = "Show List";
+/* Get a random recommendation from the home screen */
+"get-rec-title" = "What's Next?";
+

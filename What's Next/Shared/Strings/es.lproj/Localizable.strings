@@ -126,3 +126,11 @@
 "app-store-title" = "¿Que Próximo?: Recomendaciones";
 /* The subtitle in the App Store (30 character max) */
 "app-store-subtitle" = "Rastrear las recomendaciones";
+
+// Home Screen Quick Actions
+/* Add a recommendation from the home screen */
+"add-rec-title" = "Agregar Recomendación";
+/* Show all recommendations from the home screen */
+"show-list-title" = "Lista de Recomendaciones";
+/* Get a random recommendation from the home screen */
+"get-rec-title" = "Próximo";
