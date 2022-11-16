@@ -15,9 +15,7 @@ struct MainScreenView: View {
     @FetchRequest(sortDescriptors: [])
     private var items: FetchedResults<Item>
 
-    @State var startPoint = UnitPoint(x: 0, y: 0)
-    @State var endPoint = UnitPoint(x: 0, y: 2)
-
+    // MARK: Body
     var body: some View {
         NavigationView {
             ZStack {
@@ -28,8 +26,10 @@ struct MainScreenView: View {
                     Text("app-title", comment: "Main app screen title")
                         .accessibilityElement()
                         .foregroundColor(.white)
-                        .font(.largeTitle.bold().lowercaseSmallCaps())
+                        .font(.system(size: 500).bold().lowercaseSmallCaps())
+                        .minimumScaleFactor(0.01)
                         .multilineTextAlignment(.center)
+                        .lineLimit(1)
                     Spacer()
                     Spacer()
                     NavigationLink(
@@ -94,18 +94,19 @@ struct MainScreenView: View {
         .navigationViewStyle(StackNavigationViewStyle())
         #endif
         .onChange(of: phase) { newPhase in
-            switch newPhase {
-            case .active:
-                print("skipping active")
-            case .inactive, .background:
-                print("inactive")
+            if newPhase == .background || newPhase == .inactive {
                 addQuickActions()
-            @unknown default:
-                print(newPhase)
             }
+        }
+        .onOpenURL { url in
+            quickActionSettings.quickAction =
+            url.absoluteString == QuickActionSettings.ShortcutAction.ADD_REC.rawValue
+                ? .ADD_REC
+                : .GET_REC
         }
     }
     
+    // MARK: Quick Actions
     func addQuickActions() {
         var shortcutItems: [UIApplicationShortcutItem] = [
             UIApplicationShortcutItem(
@@ -146,8 +147,14 @@ struct MainScreenView: View {
     }
 }
 
+// MARK: Gradient Background
 struct Background: View {
     @Environment(\.accessibilityReduceMotion) var reduceMotion
+
+    #if !DEBUG
+    var timer = Timer.publish(every: 6, on: .current, in: .default).autoconnect()
+    #endif
+    @State var rotation = Double(Int.random(in: 0...360))
 
     let colors = [
         .accentColor,
@@ -160,9 +167,16 @@ struct Background: View {
         AngularGradient(
             colors: colors,
             center: UnitPoint(x: 4, y: 0),
-            angle: .degrees(Double.random(in: 0...360))
+            angle: .degrees(rotation)
         )
             .ignoresSafeArea()
+            #if !DEBUG
+            .onReceive(timer) { [self] _ in
+                withAnimation(.linear(duration: 6)) {
+                    self.rotation += 120
+                }
+            }
+            #endif
     }
 }
 

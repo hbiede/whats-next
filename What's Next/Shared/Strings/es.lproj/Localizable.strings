@@ -13,20 +13,36 @@
 "tvShow" = "Programa de Televisión";
 /* Book Type - Title Case */
 "book" = "Libro";
+/* Movie Type - Title Case - Plural */
+"movie-plural" = "Películas";
+/* TV Show Type - Title Case - Plural */
+"tvShow-plural" = "Programas de Televisión";
+/* Book Type - Title Case - Plural */
+"book-plural" = "Libros";
 /* Movie Type - Start of Sentence Case */
 "movie-sentence-start" = "Película";
 /* TV Show Type - Start of Sentence Case */
 "tvShow-sentence-start" = "Programa de televisión";
 /* Book Type - Start of Sentence Case */
 "book-sentence-start" = "Libro";
+/* Movie Type - Start of Sentence Case - Plural */
+"movie-sentence-start-plural" = "Películas";
+/* TV Show Type - Start of Sentence Case - Plural */
+"tvShow-sentence-start-plural" = "Programas de televisión";
+/* Book Type - Start of Sentence Case - Plural */
+"book-sentence-start-plural" = "Libros";
 /* Movie Type - Mid-sentence Case */
 "movie-mid-sentence" = "una película";
 /* TV Show Type - Mid-sentence Case */
 "tvShow-mid-sentence" = "una programa de televisión";
 /* Book Type - Mid-sentence Case */
 "book-mid-sentence" = "un libro";
-/* Type selector label */
-"rec-type-label" = "Tipo";
+/* Movie Type - Mid-sentence Case - Plural */
+"movie-mid-sentence-plural" = "películas";
+/* TV Show Type - Mid-sentence Case - Plural */
+"tvShow-mid-sentence-plural" = "programas de televisión";
+/* Book Type - Mid-sentence Case - Plural */
+"book-mid-sentence-plural" = "libros";
 
 /* Recommended by edit field label */
 "rec-by-field-label" = "Recomendado por";
@@ -54,6 +70,8 @@
 "movie-name-field-label" = "Nombre de pelicula";
 /* Notes edit field label */
 "notes-field-label" = "Notas";
+/* Type selector label */
+"rec-type-label" = "Tipo";
 /* Save changes to a record */
 "save-change-button" = "Salvar";
 /* Message for when an entry is successfully added */
@@ -134,3 +152,9 @@
 "show-list-title" = "Lista de Recomendaciones";
 /* Get a random recommendation from the home screen */
 "get-rec-title" = "Próximo";
+
+// Widget
+/* The description display on single widget selection screen */
+"single-widget-desc" = "Ver el número de recomendaciones para un tipo";
+/* The description display on widget selection screen */
+"widget-desc" = "Ver todas las recomendaciones en un solo lugar";

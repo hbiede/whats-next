@@ -6,10 +6,41 @@
 //
 
 import CoreData
+import WidgetKit
 
+// MARK: Save to app group
+func saveItemCounts(context: NSManagedObjectContext) {
+    if let userDefaults = UserDefaults(suiteName: APP_GROUP) {
+        var items: [Item] = []
+        do {
+            try items = context.fetch(Item.fetchRequest())
+        } catch {
+            print("X \(error)")
+            return
+        }
+        let countsDict = NSMutableDictionary()
+        let recCountsAccumulator = items.reduce(into: [:]) { acc, item in
+            acc[item.type!, default: 0] += 1
+        }
+        recCountsAccumulator.keys.forEach { key in
+            countsDict.setValue(recCountsAccumulator[key, default: 0], forKey: key)
+        }
+
+        let resultDic = try? NSKeyedArchiver.archivedData(
+            withRootObject: countsDict,
+            requiringSecureCoding: false
+        )
+        userDefaults.set(resultDic, forKey: WIDGET_COUNT_KEY)
+        WidgetCenter.shared.reloadTimelines(ofKind: COMBINED_WIDGET_KIND)
+        WidgetCenter.shared.reloadTimelines(ofKind: SINGLE_WIDGET_KIND)
+    }
+}
+
+// MARK: Save to iCloud
 struct PersistenceController {
     static let shared = PersistenceController()
 
+    #if DEBUG
     /**
      * Generates fake items for the UI previews
      */
@@ -39,14 +70,11 @@ struct PersistenceController {
             try viewContext.save()
         } catch {
             let nsError = error as NSError
-            #if DEBUG
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            #else
-            print(nsError.localizedDescription)
-            #endif
         }
         return result
     }()
+    #endif
 
     let container: NSPersistentCloudKitContainer
 

@@ -26,6 +26,7 @@ struct ItemDetailView: View {
 
     @State private var didSave = false
 
+    // MARK: Body
     @ViewBuilder
     var body: some View {
         Form {
@@ -49,7 +50,7 @@ struct ItemDetailView: View {
                         NSLocalizedString("movie-name-field-label", comment: "Movie name edit field label"),
                         text: $name
                     )
-                } else if item.type == "Book" {
+                } else if item.type == RecType.book.description {
                     TextField(
                         NSLocalizedString("book-name-field-label", comment: "Book title edit field label"),
                         text: $name
@@ -119,6 +120,7 @@ struct ItemDetailView: View {
         .navigationTitle("edit-recommendation-page-title")
     }
 
+    // MARK: Confirm
     func confirm() {
         didSave = false
         if name.trimmingCharacters(in: .whitespacesAndNewlines) != item.name {
@@ -152,11 +154,13 @@ struct ItemDetailView: View {
         if didSave {
             do {
                 try viewContext.save()
+                saveItemCounts(context: viewContext)
             } catch {}
             viewContext.reset()
         }
     }
 
+    // MARK: Delete
     func delete() {
         viewContext.delete(item)
         do {
@@ -166,6 +170,7 @@ struct ItemDetailView: View {
         self.presentationMode.wrappedValue.dismiss()
     }
 
+    // MARK: Undo
     func undo() {
         name = item.name ?? ""
         author = item.author ?? ""

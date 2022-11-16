@@ -145,8 +145,14 @@ private let spokenItemFormatter: DateFormatter = {
     return formatter
 }()
 
+#if DEBUG
 struct UpNextScreen_Previews: PreviewProvider {
     static var previews: some View {
         UpNextScreen()
+            .environment(
+                \.managedObjectContext,
+                 PersistenceController.preview.container.viewContext
+            )
     }
 }
+#endif

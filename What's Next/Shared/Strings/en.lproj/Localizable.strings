@@ -13,18 +13,36 @@
 "tvShow" = "TV Show";
 /* Book Type - Title Case */
 "book" = "Book";
+/* Movie Type - Title Case - Plural */
+"movie-plural" = "Movies";
+/* TV Show Type - Title Case - Plural */
+"tvShow-plural" = "TV Shows";
+/* Book Type - Title Case - Plural */
+"book-plural" = "Books";
 /* Movie Type - Start of Sentence Case */
 "movie-sentence-start" = "Movie";
 /* TV Show Type - Start of Sentence Case */
 "tvShow-sentence-start" = "TV show";
 /* Book Type - Start of Sentence Case */
 "book-sentence-start" = "Book";
+/* Movie Type - Start of Sentence Case - Plural */
+"movie-sentence-start-plural" = "Movies";
+/* TV Show Type - Start of Sentence Case - Plural */
+"tvShow-sentence-start-plural" = "TV shows";
+/* Book Type - Start of Sentence Case - Plural */
+"book-sentence-start-plural" = "Books";
 /* Movie Type - Mid-sentence Case */
 "movie-mid-sentence" = "movie";
 /* TV Show Type - Mid-sentence Case */
 "tvShow-mid-sentence" = "TV show";
 /* Book Type - Mid-sentence Case */
 "book-mid-sentence" = "book";
+/* Movie Type - Mid-sentence Case - Plural */
+"movie-mid-sentence-plural" = "movies";
+/* TV Show Type - Mid-sentence Case - Plural */
+"tvShow-mid-sentence-plural" = "TV shows";
+/* Book Type - Mid-sentence Case - Plural */
+"book-mid-sentence-plural" = "books";
 
 /* Recommended by edit field label */
 "rec-by-field-label" = "Recommended by";
@@ -97,7 +115,7 @@
 /* No movies are entered for a random suggestion to be given */
 "no-movie-records-text" = "No movie records found";
 /* No TV shows are entered for a random suggestion to be given */
-"no-tv-records-text" = "No TV Show records found";
+"no-tv-records-text" = "No TV show records found";
 /* Button to allow the user to get a different recommendation */
 "refresh-button-label" = "Refresh";
 
@@ -135,3 +153,8 @@
 /* Get a random recommendation from the home screen */
 "get-rec-title" = "What's Next?";
 
+// Widget
+/* The description display on single widget selection screen */
+"single-widget-desc" = "View the number of recommendations for a type";
+/* The description display on widget selection screen */
+"widget-desc" = "View all recommendations in one place";

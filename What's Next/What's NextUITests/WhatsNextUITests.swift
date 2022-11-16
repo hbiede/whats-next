@@ -8,22 +8,27 @@
 
 import XCTest
 
+let SNAPSHOPPING = false
+
 class WhatsNextUITests: XCTestCase {
 
     override func setUpWithError() throws {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
     }
 
     // swiftlint:disable function_body_length
     func testSnapshots() throws {
+        if SNAPSHOPPING {
+            UIView.setAnimationsEnabled(false)
+        }
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
-        setupSnapshot(app)
+        if SNAPSHOPPING {
+            setupSnapshot(app, waitForAnimations: false)
+        }
         app.launch()
+        app.activate()
 
         let lang = getLanguage()
         UserDefaults.standard.set(lang, forKey: "i18n_language")
@@ -62,7 +67,9 @@ class WhatsNextUITests: XCTestCase {
             NSLocalizedString("toy-story-notes", bundle: bundle, comment: "Toy Story notes")
         )
 
-        snapshot("2AddRecommendation")
+        if SNAPSHOPPING {
+            snapshot("2AddRecommendation")
+        }
 
         XCTAssertTrue(tablesQuery.cells[
             NSLocalizedString("confirm-addition-button-label", bundle: bundle, comment: "")
@@ -168,7 +175,9 @@ class WhatsNextUITests: XCTestCase {
         app.navigationBars[
             NSLocalizedString("add-rec-screen-title", bundle: bundle, comment: "")
         ].buttons.firstMatch.tap()
-        snapshot("4MainMenu")
+        if SNAPSHOPPING {
+            snapshot("4MainMenu")
+        }
 
         app.buttons[NSLocalizedString("whats-next-menu-button", bundle: bundle, comment: "")].tap()
         XCTAssertTrue(tablesQuery.staticTexts[
@@ -209,7 +218,9 @@ class WhatsNextUITests: XCTestCase {
                 .element
                 .exists
         )
-        snapshot("1Recommendation")
+        if SNAPSHOPPING {
+            snapshot("1Recommendation")
+        }
 
         app.navigationBars[
             NSLocalizedString("up-next-page-title", bundle: bundle, comment: "")
@@ -217,7 +228,9 @@ class WhatsNextUITests: XCTestCase {
         app.buttons[
             NSLocalizedString("see-list-menu-button", bundle: bundle, comment: "")
         ].tap()
-        snapshot("3List")
+        if SNAPSHOPPING {
+            snapshot("3List")
+        }
 
         // Clear entries
         tablesQuery.buttons.firstMatch.tap()
@@ -232,14 +245,16 @@ class WhatsNextUITests: XCTestCase {
     // swiftlint:enable function_body_length
 
     // Uncomment when not using as a snapshot scheme
-//    func testLaunchPerformance() throws {
-//        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-//            // This measures how long it takes to launch your application.
-//            measure(metrics: [XCTApplicationLaunchMetric()]) {
-//                XCUIApplication().launch()
-//            }
-//        }
-//    }
+    func testLaunchPerformance() throws {
+        if !SNAPSHOPPING {
+            if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
+                // This measures how long it takes to launch your application.
+                measure(metrics: [XCTApplicationLaunchMetric()]) {
+                    XCUIApplication().launch()
+                }
+            }
+        }
+    }
 
     private let itemFormatter: DateFormatter = {
         let formatter = DateFormatter()

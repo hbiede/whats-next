@@ -10,14 +10,9 @@ import Foundation
 import CoreData
 
 func sortItems(items: [Item], sortMethod: String) -> [String: [Item]] {
-    var result: [String : [Item]] = [:]
-    items.forEach { item in
+    return items.reduce(into: [:]) { acc, item in
         if item.type != nil {
-            if result[item.type!] == nil {
-                result[item.type!] = []
-            }
-            result[item.type!]!.append(item)
+            acc[item.type!, default: []].append(item)
         }
     }
-    return result
 }

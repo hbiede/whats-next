@@ -16,6 +16,7 @@ struct ItemListView: View {
         animation: .default)
     private var items: FetchedResults<Item>
 
+    // MARK: Body
     @ViewBuilder
     var body: some View {
         List {
@@ -54,6 +55,7 @@ struct ItemListView: View {
         .navigationTitle("recommendation-list-page-title")
     }
 
+    // MARK: Delete
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             offsets.map { items[$0] }.forEach(viewContext.delete)
@@ -61,6 +63,7 @@ struct ItemListView: View {
             do {
                 try viewContext.save()
                 viewContext.reset()
+                saveItemCounts(context: viewContext)
             } catch {
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
@@ -69,15 +72,18 @@ struct ItemListView: View {
     }
 }
 
+#if DEBUG
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ItemListView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
+#endif
 
 struct ItemListEntry: View {
     let item: Item
 
+    // MARK: ListEntry
     @ViewBuilder
     var body: some View {
         VStack {

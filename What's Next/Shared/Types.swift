@@ -35,4 +35,11 @@ enum RecType: String, CustomStringConvertible, CaseIterable, Hashable, Identifia
         case .book: return "book-mid-sentence"
         }
       }
+    var emoji: String {
+        switch self {
+        case .movie: return "🎥"
+        case .tvShow: return "📺"
+        case .book: return "📚"
+        }
+    }
 }

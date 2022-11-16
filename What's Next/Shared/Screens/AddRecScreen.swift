@@ -20,6 +20,7 @@ struct AddRecScreen: View {
     @State private var didSave = false
     @State private var saveError = false
 
+    // MARK: View
     var body: some View {
         let recommenderBinding = Binding<String>(get: {
                     self.recommender
@@ -35,7 +36,7 @@ struct AddRecScreen: View {
                 name == "" &&
                 author == "" &&
                 recommender == "" &&
-                itemFormatter.string(from: Date()) == itemFormatter.string(from: recDate) &&
+                (Date(), formatter: itemFormatter) == (recDate, formatter: itemFormatter) &&
                 notes == "" {
                 Section {
                     Text("success-saved-message", comment: "Message for when an entry is successfully added")
@@ -108,8 +109,12 @@ struct AddRecScreen: View {
                         recommender.trimmingCharacters(in: .whitespacesAndNewlines) == "")
         }
         .navigationTitle("add-rec-screen-title")
+        .onDisappear {
+            saveItemCounts(context: viewContext)
+        }
     }
 
+    // MARK: Confirm
     private func confirm() {
         saveError = false
         didSave = false
@@ -130,6 +135,7 @@ struct AddRecScreen: View {
             recommender = ""
             recDate = Date()
             notes = ""
+            saveItemCounts(context: viewContext)
         } catch {
             print("Failed to save context to CoreData on \(Date())")
             saveError = true
