@@ -10,6 +10,7 @@ import CoreData
 
 struct ItemListView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.recommendationDate, ascending: true)],
@@ -44,11 +45,7 @@ struct ItemListView: View {
         .navigationViewStyle(StackNavigationViewStyle())
         .toolbar {
             NavigationLink(destination: AddRecScreen()) {
-                AnyView(
-                    Button(action: {}, label: {
-                        Image(systemName: "plus")
-                    })
-                )
+                Image(systemName: "plus")
             }
         }
         #endif
@@ -64,6 +61,10 @@ struct ItemListView: View {
                 try viewContext.save()
                 viewContext.reset()
                 saveItemCounts(context: viewContext)
+                if items.count == 0 {
+                    // Go back if list is empty
+                    self.presentationMode.wrappedValue.dismiss()
+                }
             } catch {
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")

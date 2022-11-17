@@ -80,6 +80,8 @@
 "tv-show-name-field-label" = "TV show name";
 /* Undo all changes to a record */
 "undo-change-button" = "Undo";
+/* Generic name */
+"name-field" = "Title";
 
 
 // List page
@@ -158,3 +160,15 @@
 "single-widget-desc" = "View the number of recommendations for a type";
 /* The description display on widget selection screen */
 "widget-desc" = "View all recommendations in one place";
+
+// Shortcut
+/* Shortcut error message */
+"failed-to-save-shortcut" = "Failed to save";
+"Add Recommendation" = "Add Recommendation";
+"Add Recommendation to What's Next" = "Add Recommendation to What's Next";
+"Recommendation Type" = "Recommendation Type";
+"Author" = "Author";
+"Title" = "Title";
+"Recommended by" = "Recommended by";
+"Recommended on" = "Recommended on";
+"Notes" = "Notes";

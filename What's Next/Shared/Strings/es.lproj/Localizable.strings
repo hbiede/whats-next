@@ -80,6 +80,8 @@
 "tv-show-name-field-label" = "Nombre del programa";
 /* Undo all changes to a record */
 "undo-change-button" = "Deshacer";
+/* Generic name */
+"name-field" = "Nombre";
 
 
 // List page
@@ -158,3 +160,15 @@
 "single-widget-desc" = "Ver el número de recomendaciones para un tipo";
 /* The description display on widget selection screen */
 "widget-desc" = "Ver todas las recomendaciones en un solo lugar";
+
+// Shortcut
+/* Shortcut error message */
+"failed-to-save-shortcut" = "Failed to save";
+"Add Recommendation" = "Agregar Recomendación";
+"Add Recommendation to What's Next" = "Agregar Recomendación a ¿Que Próximo?";
+"Recommendation Type" = "Tipo de Recomendacion";
+"Author" = "Autor(a)";
+"Title" = "Título";
+"Recommended by" = "Recomendado Por";
+"Recommended on" = "Fecha de Recomendación";
+"Notes" = "Notas";

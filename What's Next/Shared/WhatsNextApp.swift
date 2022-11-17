@@ -5,6 +5,7 @@
 //  Created by Hundter Biede on 6/17/21.
 //
 
+import AppIntents
 import SwiftUI
 
 let quickActionSettings = QuickActionSettings()
@@ -29,6 +30,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         configurationForConnecting connectingSceneSession: UISceneSession,
         options: UIScene.ConnectionOptions
     ) -> UISceneConfiguration {
+        if #available(iOS 16.0, *) {
+            IntentDonationManager.shared.donate(intent: ShortcutIntent())
+        }
+
         if let shortcutItem = options.shortcutItem {
             print("Shortcut")
             print(shortcutItem)

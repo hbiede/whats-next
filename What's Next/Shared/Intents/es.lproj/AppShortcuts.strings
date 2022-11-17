@@ -1,0 +1,9 @@
+/* 
+  AppShortcuts.strings
+  What's Next
+
+  Created by Hundter Biede on 11/16/22.
+  Copyright © 2022 com.hbiede. All rights reserved.
+*/
+
+"Add Recommendation in ${applicationName}" = "Agregar Recomendación en ${applicationName}";

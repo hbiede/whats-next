@@ -105,8 +105,8 @@ struct AddRecScreen: View {
             Button("confirm-addition-button-label", action: confirm)
                 .disabled(
                     name.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-                        (selectedType == .book && author.trimmingCharacters(in: .whitespacesAndNewlines) == "") ||
-                        recommender.trimmingCharacters(in: .whitespacesAndNewlines) == "")
+                        (selectedType == .book && author.trimmingCharacters(in: .whitespacesAndNewlines) == "")
+                    )
         }
         .navigationTitle("add-rec-screen-title")
         .onDisappear {
