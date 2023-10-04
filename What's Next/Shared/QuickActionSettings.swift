@@ -7,7 +7,11 @@
 
 import Foundation
 
-class QuickActionSettings: ObservableObject {
+class QuickActionSettings: Equatable, ObservableObject {
+    static func == (lhs: QuickActionSettings, rhs: QuickActionSettings) -> Bool {
+        lhs.quickAction == rhs.quickAction
+    }
+
 
     enum ShortcutAction: String {
         case ADD_REC = "AddRec"

@@ -16,7 +16,7 @@ struct ItemDetailView: View {
     }
 
     @Environment(\.managedObjectContext) private var viewContext
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.dismiss) var dismiss
 
     @State private var name: String = ""
     @State private var author: String = ""
@@ -151,7 +151,7 @@ struct ItemDetailView: View {
             didSave = true
         }
 
-        if didSave {
+        if didSave && viewContext.hasChanges {
             do {
                 try viewContext.save()
                 saveItemCounts(context: viewContext)
@@ -167,7 +167,7 @@ struct ItemDetailView: View {
             try viewContext.save()
         } catch {}
         viewContext.reset()
-        self.presentationMode.wrappedValue.dismiss()
+        self.dismiss()
     }
 
     // MARK: Undo

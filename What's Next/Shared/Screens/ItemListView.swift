@@ -10,7 +10,7 @@ import CoreData
 
 struct ItemListView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.dismiss) var dismiss
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.recommendationDate, ascending: true)],
@@ -63,7 +63,7 @@ struct ItemListView: View {
                 saveItemCounts(context: viewContext)
                 if items.count == 0 {
                     // Go back if list is empty
-                    self.presentationMode.wrappedValue.dismiss()
+                    self.dismiss()
                 }
             } catch {
                 let nsError = error as NSError

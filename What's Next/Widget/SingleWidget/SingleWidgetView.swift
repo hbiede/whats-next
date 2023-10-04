@@ -75,7 +75,7 @@ struct WhatsNextSingleWidgetEntryView: View {
     
             do {
                 guard let countsDict =
-                    try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(testcreateEvent as Data) as? NSMutableDictionary else {
+                        try NSKeyedUnarchiver.unarchivedObject(ofClass: NSMutableDictionary.self, from: testcreateEvent as Data) else {
                         fatalError("Cannot load countsDict")
                     }
         

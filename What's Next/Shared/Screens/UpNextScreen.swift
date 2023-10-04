@@ -110,7 +110,7 @@ struct UpNextScreen: View {
                         .cornerRadius(8)
                         .padding()
 
-                    if items.filter { $0.type == selectedType.description }.count > 1 {
+                    if items.filter({ $0.type == selectedType.description }).count > 1 {
                         Section {
                             Button("refresh-button-label", action: {
                                 // Get new `currentItem`

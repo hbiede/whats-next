@@ -15,9 +15,26 @@ struct MainScreenView: View {
     @FetchRequest(sortDescriptors: [])
     private var items: FetchedResults<Item>
 
+    @State private var showGetRec = false
+    @State private var showAddRec = false
+    @State private var showList = false
+
+    func handleQuickAction (_ newAction: QuickActionSettings.ShortcutAction?) {
+        if let newAction = newAction {
+            switch newAction {
+            case .ADD_REC:
+                showAddRec = true
+            case .GET_REC:
+                showGetRec = true
+            case .SHOW_LIST:
+                showList = true
+            }
+        }
+    }
+
     // MARK: Body
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 Background()
                 
@@ -32,11 +49,9 @@ struct MainScreenView: View {
                         .lineLimit(1)
                     Spacer()
                     Spacer()
-                    NavigationLink(
-                        destination: UpNextScreen().environment(\.managedObjectContext, viewContext),
-                        tag: QuickActionSettings.ShortcutAction.GET_REC,
-                        selection: $quickActionSettings.quickAction
-                    ) {
+                    Button {
+                        showGetRec = true
+                    } label: {
                         Text("whats-next-menu-button", comment: "Button to get to the Up Next page")
                             .font(.largeTitle)
                             .fontWeight(.bold)
@@ -51,11 +66,9 @@ struct MainScreenView: View {
                     .padding(.bottom, 10)
                     .opacity(items.isEmpty ? 0.4 : 1)
                     .disabled(items.isEmpty)
-                    NavigationLink(
-                        destination: AddRecScreen(),
-                        tag: QuickActionSettings.ShortcutAction.ADD_REC,
-                        selection: $quickActionSettings.quickAction
-                    ) {
+                    Button {
+                        showAddRec = true
+                    } label: {
                         Text("add-menu-button", comment: "Button to get to the Add Recommendation page")
                             .font(.title)
                             .fontWeight(.semibold)
@@ -64,15 +77,12 @@ struct MainScreenView: View {
                             .padding()
                             .padding(.horizontal, 20)
                             .background(Color.white)
-                        
                     }
-                    .clipShape(Capsule())
-                    .padding(.bottom, 10)
-                    NavigationLink(
-                        destination: ItemListView().environment(\.managedObjectContext, viewContext),
-                        tag: QuickActionSettings.ShortcutAction.SHOW_LIST,
-                        selection: $quickActionSettings.quickAction
-                    ) {
+                        .clipShape(Capsule())
+                        .padding(.bottom, 10)
+                    Button {
+                        showList = true
+                    } label: {
                         Text("see-list-menu-button", comment: "Button to get to the See List page")
                             .font(.title)
                             .fontWeight(.semibold)
@@ -83,21 +93,31 @@ struct MainScreenView: View {
                             .background(Color.white)
                         
                     }
-                    .clipShape(Capsule())
-                    .opacity(items.isEmpty ? 0.4 : 1)
-                    .disabled(items.isEmpty)
+                        .clipShape(Capsule())
+                        .opacity(items.isEmpty ? 0.4 : 1)
+                        .disabled(items.isEmpty)
                     Spacer()
                 }
             }
+            .navigationDestination(isPresented: $showGetRec) {
+                UpNextScreen().environment(\.managedObjectContext, viewContext)
+            }
+            .navigationDestination(isPresented: $showAddRec) {
+                AddRecScreen()
+            }
+            .navigationDestination(isPresented: $showList) {
+                ItemListView().environment(\.managedObjectContext, viewContext)
+            }
         }
-        #if os(iOS)
-        .navigationViewStyle(StackNavigationViewStyle())
-        #endif
+        .onAppear() {
+            handleQuickAction(quickActionSettings.quickAction)
+        }
         .onChange(of: phase) { newPhase in
             if newPhase == .background || newPhase == .inactive {
                 addQuickActions()
             }
         }
+        .onChange(of: quickActionSettings.quickAction, perform: handleQuickAction)
         .onOpenURL { url in
             quickActionSettings.quickAction =
             url.absoluteString == QuickActionSettings.ShortcutAction.ADD_REC.rawValue

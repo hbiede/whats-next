@@ -10,16 +10,20 @@ import AppIntents
 import Foundation
 
 @available(iOS 16.0, macOS 13.0, watchOS 9.0, tvOS 16.0, *)
-enum ShortcutRecTypeAppEnum: String, AppEnum {
+enum ShortcutRecTypeAppEnum: String, AppEnum, ExpressibleByNilLiteral {
+    init(nilLiteral: ()) {
+        self = .movie
+    }
+    
     case movie
     case tvShow
     case book
 
     static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Recommendation Type")
     static var caseDisplayRepresentations: [Self: DisplayRepresentation] = [
-        .movie: .init(stringLiteral: ShortcutRecTypeAppEnum.movie.rawValue),
-        .tvShow: .init(stringLiteral: ShortcutRecTypeAppEnum.tvShow.rawValue),
-        .book: .init(stringLiteral: ShortcutRecTypeAppEnum.book.rawValue)
+        .movie: .init(title: "movie"),
+        .tvShow: .init(title: "tvShow"),
+        .book: .init(title: "book")
     ]
 
     var description: String {
