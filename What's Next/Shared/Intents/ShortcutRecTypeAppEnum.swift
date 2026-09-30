@@ -19,8 +19,8 @@ enum ShortcutRecTypeAppEnum: String, AppEnum, ExpressibleByNilLiteral {
     case tvShow
     case book
 
-    static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Recommendation Type")
-    static var caseDisplayRepresentations: [Self: DisplayRepresentation] = [
+    static let typeDisplayRepresentation = TypeDisplayRepresentation(name: "Recommendation Type")
+    static let caseDisplayRepresentations: [Self: DisplayRepresentation] = [
         .movie: .init(title: "movie"),
         .tvShow: .init(title: "tvShow"),
         .book: .init(title: "book")

@@ -44,7 +44,7 @@ struct PersistenceController {
     /**
      * Generates fake items for the UI previews
      */
-    static var preview: PersistenceController = {
+    @MainActor static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
         for itemCounter in 0..<10 {

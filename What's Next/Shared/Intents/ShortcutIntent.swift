@@ -12,10 +12,10 @@ import AppIntents
 @available(iOS 16.0, macOS 13.0, watchOS 9.0, tvOS 16.0, *)
 struct ShortcutIntent: AppIntent, CustomIntentMigratedAppIntent {
     static let intentClassName = "ShortcutIntent"
-    static var openAppWhenRun: Bool = false
+    static let openAppWhenRun: Bool = false
 
-    static var title: LocalizedStringResource = "Add Recommendation"
-    static var description: IntentDescription = .init("Add Recommendation to What's Next")
+    static let title: LocalizedStringResource = "Add Recommendation"
+    static let description: IntentDescription = .init("Add Recommendation to What's Next")
 
     @Parameter(title: "Recommendation Type", default: .movie)
     var recommendationType: ShortcutRecTypeAppEnum

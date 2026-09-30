@@ -6,18 +6,21 @@
 //
 
 import Foundation
+import Combine
 
-class QuickActionSettings: Equatable, ObservableObject {
-    static func == (lhs: QuickActionSettings, rhs: QuickActionSettings) -> Bool {
-        lhs.quickAction == rhs.quickAction
-    }
-
-
+@Observable
+class QuickActionSettings {
     enum ShortcutAction: String {
         case ADD_REC = "AddRec"
         case SHOW_LIST = "ShowList"
         case GET_REC = "GetRec"
     }
 
-    @Published var quickAction: ShortcutAction? = nil
+    var quickAction: ShortcutAction? = nil
+}
+
+extension QuickActionSettings: Equatable {
+    static func == (lhs: QuickActionSettings, rhs: QuickActionSettings) -> Bool {
+        lhs.quickAction == rhs.quickAction
+    }
 }

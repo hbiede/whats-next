@@ -11,7 +11,7 @@ import Foundation
 
 @available(iOS 16.0, *)
 struct WhatsNextAppShortcuts: AppShortcutsProvider {
-    static var shortcutTileColor: ShortcutTileColor = .purple
+    static let shortcutTileColor: ShortcutTileColor = .purple
 
     static var appShortcuts: [AppShortcut] {
         AppShortcut(
@@ -19,6 +19,7 @@ struct WhatsNextAppShortcuts: AppShortcutsProvider {
             phrases: [
                 "Add Recommendation in \(.applicationName)",
             ],
+            shortTitle: "Add Recommendation",
             systemImageName: "popcorn.fill"
         )
     }

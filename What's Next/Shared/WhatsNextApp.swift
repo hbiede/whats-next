@@ -8,7 +8,6 @@
 import AppIntents
 import SwiftUI
 
-let quickActionSettings = QuickActionSettings()
 
 @main
 struct WhatsNextApp: App {
@@ -19,12 +18,15 @@ struct WhatsNextApp: App {
         WindowGroup {
             MainScreenView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                .environmentObject(quickActionSettings)
+                .environment(AppDelegate.quickActionSettings)
         }
     }
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
+
+    fileprivate static let quickActionSettings = QuickActionSettings()
+
     func application(
         _ application: UIApplication,
         configurationForConnecting connectingSceneSession: UISceneSession,
@@ -38,7 +40,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             print("Shortcut")
             print(shortcutItem)
             if let newShortcutAction = QuickActionSettings.ShortcutAction(rawValue: shortcutItem.type) {
-                quickActionSettings.quickAction = newShortcutAction
+                Self.quickActionSettings.quickAction = newShortcutAction
             }
         }
         
@@ -52,7 +54,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 class CustomSceneDelegate: UIResponder, UIWindowSceneDelegate {
     func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         if let newShortcutAction = QuickActionSettings.ShortcutAction(rawValue: shortcutItem.type) {
-            quickActionSettings.quickAction = newShortcutAction
+            AppDelegate.quickActionSettings.quickAction = newShortcutAction
         }
     }
 }

@@ -5,12 +5,13 @@
 //  Created by Hundter Biede on 6/17/21.
 //
 
+import CoreData
 import SwiftUI
 
 struct MainScreenView: View {
     @Environment(\.scenePhase) private var phase
     @Environment(\.managedObjectContext) private var viewContext
-    @EnvironmentObject var quickActionSettings: QuickActionSettings
+    @Environment(QuickActionSettings.self) var quickActionSettings: QuickActionSettings
 
     @FetchRequest(sortDescriptors: [])
     private var items: FetchedResults<Item>
@@ -203,6 +204,6 @@ struct Background: View {
 struct MainScreenView_Previews: PreviewProvider {
     static var previews: some View {
         MainScreenView()
-            .environmentObject(QuickActionSettings())
+            .environment(QuickActionSettings())
     }
 }
