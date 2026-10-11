@@ -37,6 +37,11 @@
                BlueprintName = "What&apos;s NextUITests"
                ReferencedContainer = "container:What&apos;s Next.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "AppIntentsTests">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>

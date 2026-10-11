@@ -8,41 +8,36 @@
 
 import WidgetKit
 import SwiftUI
-import Intents
 
-struct SingleWidgetProvider: IntentTimelineProvider {
+struct SingleWidgetProvider: AppIntentTimelineProvider {
     typealias Entry = WhatsNextSingleEntry
 
-    typealias Intent = ParameterizedConfigurationIntent
+    typealias Intent = SingleWidgetConfigurationIntent
 
     func placeholder(in context: Context) -> Entry {
-        Entry(date: Date(), configuration: Intent())
+        Entry(date: Date(), type: .movie, count: 3)
     }
 
-    func getSnapshot(
-        for configuration: Intent,
-        in context: Context,
-        completion: @escaping (Entry) -> ()
-    ) {
-        completion(
-            Entry(date: Date(), configuration: configuration)
-        )
+    func snapshot(for configuration: Intent, in context: Context) async -> Entry {
+        entry(for: configuration)
     }
 
-    func getTimeline(
-        for configuration: Intent,
-        in context: Context,
-        completion: @escaping (Timeline<Entry>) -> ()
-    ) {
-        let timeline = Timeline(
-            entries: [Entry(date: Date(), configuration: configuration)],
-            policy: .atEnd
+    func timeline(for configuration: Intent, in context: Context) async -> Timeline<Entry> {
+        // The app reloads widgets whenever its recommendations change
+        Timeline(entries: [entry(for: configuration)], policy: .never)
+    }
+
+    private func entry(for configuration: Intent) -> Entry {
+        Entry(
+            date: Date(),
+            type: configuration.recType,
+            count: SharedRecommendations.counts()[configuration.recType, default: 0]
         )
-        completion(timeline)
     }
 }
 
 struct WhatsNextSingleEntry: TimelineEntry {
     let date: Date
-    let configuration: ParameterizedConfigurationIntent
+    let type: RecType
+    let count: Int
 }

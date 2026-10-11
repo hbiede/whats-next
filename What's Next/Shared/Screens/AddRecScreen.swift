@@ -5,6 +5,7 @@
 //  Created by Hundter Biede on 6/17/21.
 //
 
+import CoreData
 import SwiftUI
 
 struct AddRecScreen: View {
@@ -36,7 +37,7 @@ struct AddRecScreen: View {
                 name == "" &&
                 author == "" &&
                 recommender == "" &&
-                (Date(), formatter: itemFormatter) == (recDate, formatter: itemFormatter) &&
+                Calendar.current.isDateInToday(recDate) &&
                 notes == "" {
                 Section {
                     Text("success-saved-message", comment: "Message for when an entry is successfully added")
@@ -46,7 +47,7 @@ struct AddRecScreen: View {
                         name == "" &&
                         author == "" &&
                         recommender == "" &&
-                        (Date(), formatter: itemFormatter) == (recDate, formatter: itemFormatter) &&
+                        Calendar.current.isDateInToday(recDate) &&
                         notes == "" {
                 Section {
                     Text("failed-save-message", comment: "Message for when an entry failed to be added")
@@ -109,9 +110,6 @@ struct AddRecScreen: View {
                     )
         }
         .navigationTitle("add-rec-screen-title")
-        .onDisappear {
-            saveItemCounts(context: viewContext)
-        }
     }
 
     // MARK: Confirm
@@ -135,9 +133,9 @@ struct AddRecScreen: View {
             recommender = ""
             recDate = Date()
             notes = ""
-            saveItemCounts(context: viewContext)
         } catch {
             print("Failed to save context to CoreData on \(Date())")
+            viewContext.rollback()
             saveError = true
         }
     }
@@ -163,15 +161,6 @@ struct AddRecScreen: View {
     #endif
 }
 
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .none
-    return formatter
-}()
-
-struct AddRecScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        AddRecScreen()
-    }
+#Preview {
+    AddRecScreen()
 }

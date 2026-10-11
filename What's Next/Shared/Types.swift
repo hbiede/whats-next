@@ -5,9 +5,10 @@
 //  Created by Hundter Biede on 6/17/21.
 //
 
+import AppIntents
 import Foundation
 
-enum RecType: String, CustomStringConvertible, CaseIterable, Hashable, Identifiable {
+nonisolated enum RecType: String, CustomStringConvertible, CaseIterable, Codable, Hashable, Identifiable, Sendable {
     var id: String { self.rawValue }
 
     case movie
@@ -35,6 +36,20 @@ enum RecType: String, CustomStringConvertible, CaseIterable, Hashable, Identifia
         case .book: return "book-mid-sentence"
         }
       }
+    var pluralDescription: String {
+        switch self {
+        case .movie: return "movie-plural"
+        case .tvShow: return "tvShow-plural"
+        case .book: return "book-plural"
+        }
+    }
+    var noRecordsDescription: String {
+        switch self {
+        case .movie: return "no-movie-records-text"
+        case .tvShow: return "no-tv-records-text"
+        case .book: return "no-book-records-text"
+        }
+    }
     var emoji: String {
         switch self {
         case .movie: return "🎥"
@@ -42,4 +57,33 @@ enum RecType: String, CustomStringConvertible, CaseIterable, Hashable, Identifia
         case .book: return "📚"
         }
     }
+    /// SF Symbol for the type; unlike the emoji, it takes on the tint in tinted and clear widgets
+    var systemImage: String {
+        switch self {
+        case .movie: return "film"
+        case .tvShow: return "tv"
+        case .book: return "book.closed"
+        }
+    }
+}
+
+extension RecType: AppEnum {
+    static let typeDisplayRepresentation = TypeDisplayRepresentation(name: "Recommendation Type")
+    static let caseDisplayRepresentations: [RecType: DisplayRepresentation] = [
+        .movie: DisplayRepresentation(
+            title: "movie",
+            image: .init(systemName: "film"),
+            synonyms: ["movie-synonym-film"]
+        ),
+        .tvShow: DisplayRepresentation(
+            title: "tvShow",
+            image: .init(systemName: "tv"),
+            synonyms: ["tvShow-synonym-show", "tvShow-synonym-series"]
+        ),
+        .book: DisplayRepresentation(
+            title: "book",
+            image: .init(systemName: "book.closed"),
+            synonyms: ["book-synonym-novel"]
+        )
+    ]
 }

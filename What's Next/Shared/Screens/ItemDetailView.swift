@@ -6,6 +6,8 @@
 //  Copyright © 2021 com.hbiede. All rights reserved.
 //
 
+import AppIntents
+import CoreData
 import SwiftUI
 
 struct ItemDetailView: View {
@@ -88,11 +90,7 @@ struct ItemDetailView: View {
                     recDate = item.recommendationDate ?? Date()
                     notes = item.notes ?? ""
                 }
-            if #available(iOS 15.0, macOS 12.0, *) {
-                Button("delete-recommnedation-button", role: .destructive, action: delete)
-            } else {
-                Button("delete-recommnedation-button", action: delete)
-            }
+            Button("delete-recommnedation-button", role: .destructive, action: delete)
             if
                 item.name != name ||
                     item.author != author ||
@@ -101,23 +99,20 @@ struct ItemDetailView: View {
                     item.recommendationDate == nil ||
                     itemFormatter.string(from: recDate) != itemFormatter.string(from: item.recommendationDate!)
             {
+                // Recommended by is optional, as it is when adding
                 Button("save-change-button", action: confirm)
                     .disabled(
                         name.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-                        recommender.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
                         (
                             item.type == RecType.book.description &&
                             author.trimmingCharacters(in: .whitespacesAndNewlines) == ""
                         )
                     )
-                if #available(iOS 15.0, macOS 12.0, *) {
-                    Button("undo-change-button", role: .cancel, action: undo)
-                } else {
-                    Button("undo-change-button", action: undo)
-                }
+                Button("undo-change-button", role: .cancel, action: undo)
             }
         }
         .navigationTitle("edit-recommendation-page-title")
+        .appEntityIdentifier(item.id.map(RecommendationEntity.identifier(for:)))
     }
 
     // MARK: Confirm
@@ -154,9 +149,11 @@ struct ItemDetailView: View {
         if didSave && viewContext.hasChanges {
             do {
                 try viewContext.save()
-                saveItemCounts(context: viewContext)
-            } catch {}
-            viewContext.reset()
+            } catch {
+                print("Failed to save changes: \(error)")
+                viewContext.rollback()
+                didSave = false
+            }
         }
     }
 
@@ -165,8 +162,11 @@ struct ItemDetailView: View {
         viewContext.delete(item)
         do {
             try viewContext.save()
-        } catch {}
-        viewContext.reset()
+        } catch {
+            print("Failed to delete: \(error)")
+            viewContext.rollback()
+            return
+        }
         self.dismiss()
     }
 

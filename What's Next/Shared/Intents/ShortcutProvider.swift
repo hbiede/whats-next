@@ -9,11 +9,20 @@
 import AppIntents
 import Foundation
 
-@available(iOS 16.0, *)
 struct WhatsNextAppShortcuts: AppShortcutsProvider {
     static let shortcutTileColor: ShortcutTileColor = .purple
 
     static var appShortcuts: [AppShortcut] {
+        AppShortcut(
+            intent: GetNextRecommendationIntent(),
+            phrases: [
+                "What should I try next in \(.applicationName)",
+                "What \(\.$recommendationType) should I try next in \(.applicationName)",
+                "Get a recommendation from \(.applicationName)"
+            ],
+            shortTitle: "get-rec-title",
+            systemImageName: "lightbulb.fill"
+        )
         AppShortcut(
             intent: ShortcutIntent(),
             phrases: [

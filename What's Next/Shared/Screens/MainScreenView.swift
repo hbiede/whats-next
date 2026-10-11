@@ -19,18 +19,29 @@ struct MainScreenView: View {
     @State private var showGetRec = false
     @State private var showAddRec = false
     @State private var showList = false
+    @State private var openedItem: Item?
 
-    func handleQuickAction (_ newAction: QuickActionSettings.ShortcutAction?) {
-        if let newAction = newAction {
-            switch newAction {
-            case .ADD_REC:
-                showAddRec = true
-            case .GET_REC:
-                showGetRec = true
-            case .SHOW_LIST:
-                showList = true
-            }
+    func handleQuickAction(_ newAction: QuickActionSettings.ShortcutAction?) {
+        guard let newAction else { return }
+        // Clear it so asking for the same screen again still triggers `onChange`
+        quickActionSettings.quickAction = nil
+        switch newAction {
+        case .ADD_REC:
+            showAddRec = true
+        case .GET_REC:
+            showGetRec = true
+        case .SHOW_LIST:
+            showList = true
         }
+    }
+
+    func openRecommendation(_ id: UUID?) {
+        guard let id else { return }
+        quickActionSettings.recommendationToOpen = nil
+        let request = Item.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+        request.fetchLimit = 1
+        openedItem = try? viewContext.fetch(request).first
     }
 
     // MARK: Body
@@ -38,32 +49,31 @@ struct MainScreenView: View {
         NavigationStack {
             ZStack {
                 Background()
-                
+
                 VStack {
                     Spacer()
                     Text("app-title", comment: "Main app screen title")
                         .accessibilityElement()
-                        .foregroundColor(.white)
+                        .foregroundStyle(.white)
                         .font(.system(size: 500).bold().lowercaseSmallCaps())
                         .minimumScaleFactor(0.01)
                         .multilineTextAlignment(.center)
                         .lineLimit(1)
                     Spacer()
                     Spacer()
+                    // The labels stay part of their buttons, so VoiceOver and UI tests find them by name
                     Button {
                         showGetRec = true
                     } label: {
                         Text("whats-next-menu-button", comment: "Button to get to the Up Next page")
                             .font(.largeTitle)
                             .fontWeight(.bold)
-                            .foregroundColor(.black)
-                            .accessibilityElement()
-                            .padding()
+                            .foregroundStyle(.black)
+                            .padding(.vertical, 8)
                             .padding(.horizontal, 10)
-                            .background(Color.white)
-                        
                     }
-                    .clipShape(Capsule())
+                    .buttonStyle(.glassProminent)
+                    .tint(.white)
                     .padding(.bottom, 10)
                     .opacity(items.isEmpty ? 0.4 : 1)
                     .disabled(items.isEmpty)
@@ -73,30 +83,25 @@ struct MainScreenView: View {
                         Text("add-menu-button", comment: "Button to get to the Add Recommendation page")
                             .font(.title)
                             .fontWeight(.semibold)
-                            .foregroundColor(.black)
-                            .accessibilityElement()
-                            .padding()
+                            .foregroundStyle(.white)
+                            .padding(.vertical, 8)
                             .padding(.horizontal, 20)
-                            .background(Color.white)
                     }
-                        .clipShape(Capsule())
-                        .padding(.bottom, 10)
+                    .buttonStyle(.glass)
+                    .padding(.bottom, 10)
                     Button {
                         showList = true
                     } label: {
                         Text("see-list-menu-button", comment: "Button to get to the See List page")
                             .font(.title)
                             .fontWeight(.semibold)
-                            .foregroundColor(.black)
-                            .accessibilityElement()
-                            .padding()
+                            .foregroundStyle(.white)
+                            .padding(.vertical, 8)
                             .padding(.horizontal, 20)
-                            .background(Color.white)
-                        
                     }
-                        .clipShape(Capsule())
-                        .opacity(items.isEmpty ? 0.4 : 1)
-                        .disabled(items.isEmpty)
+                    .buttonStyle(.glass)
+                    .opacity(items.isEmpty ? 0.4 : 1)
+                    .disabled(items.isEmpty)
                     Spacer()
                 }
             }
@@ -109,26 +114,33 @@ struct MainScreenView: View {
             .navigationDestination(isPresented: $showList) {
                 ItemListView().environment(\.managedObjectContext, viewContext)
             }
+            .navigationDestination(item: $openedItem) { item in
+                ItemDetailView(item: item)
+            }
         }
-        .onAppear() {
+        .onAppear {
             handleQuickAction(quickActionSettings.quickAction)
+            openRecommendation(quickActionSettings.recommendationToOpen)
         }
-        .onChange(of: phase) { newPhase in
+        .onChange(of: phase) { _, newPhase in
             if newPhase == .background || newPhase == .inactive {
                 addQuickActions()
             }
         }
-        .onChange(of: quickActionSettings.quickAction, perform: handleQuickAction)
+        .onChange(of: quickActionSettings.quickAction) { _, newAction in
+            handleQuickAction(newAction)
+        }
+        .onChange(of: quickActionSettings.recommendationToOpen) { _, id in
+            openRecommendation(id)
+        }
         .onOpenURL { url in
-            quickActionSettings.quickAction =
-            url.absoluteString == QuickActionSettings.ShortcutAction.ADD_REC.rawValue
-                ? .ADD_REC
-                : .GET_REC
+            quickActionSettings.handle(url)
         }
     }
-    
+
     // MARK: Quick Actions
     func addQuickActions() {
+        #if os(iOS)
         var shortcutItems: [UIApplicationShortcutItem] = [
             UIApplicationShortcutItem(
                 type: QuickActionSettings.ShortcutAction.ADD_REC.rawValue,
@@ -165,6 +177,7 @@ struct MainScreenView: View {
             )
         }
         UIApplication.shared.shortcutItems = shortcutItems
+        #endif
     }
 }
 
@@ -172,9 +185,6 @@ struct MainScreenView: View {
 struct Background: View {
     @Environment(\.accessibilityReduceMotion) var reduceMotion
 
-    #if !DEBUG
-    var timer = Timer.publish(every: 6, on: .current, in: .default).autoconnect()
-    #endif
     @State var rotation = Double(Int.random(in: 0...360))
 
     let colors = [
@@ -192,18 +202,21 @@ struct Background: View {
         )
             .ignoresSafeArea()
             #if !DEBUG
-            .onReceive(timer) { [self] _ in
-                withAnimation(.linear(duration: 6)) {
-                    self.rotation += 120
+            .task(id: reduceMotion) {
+                // Hold still for people who've asked for less motion
+                guard !reduceMotion else { return }
+                while !Task.isCancelled {
+                    try? await Task.sleep(for: .seconds(6))
+                    withAnimation(.linear(duration: 6)) {
+                        rotation += 120
+                    }
                 }
             }
             #endif
     }
 }
 
-struct MainScreenView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainScreenView()
-            .environment(QuickActionSettings())
-    }
+#Preview {
+    MainScreenView()
+        .environment(QuickActionSettings())
 }

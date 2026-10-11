@@ -9,16 +9,15 @@
 import Foundation
 import AppIntents
 
-@available(iOS 16.0, macOS 13.0, watchOS 9.0, tvOS 16.0, *)
 struct ShortcutIntent: AppIntent, CustomIntentMigratedAppIntent {
     static let intentClassName = "ShortcutIntent"
-    static let openAppWhenRun: Bool = false
+    static let supportedModes: IntentModes = .background
 
     static let title: LocalizedStringResource = "Add Recommendation"
     static let description: IntentDescription = .init("Add Recommendation to What's Next")
 
     @Parameter(title: "Recommendation Type", default: .movie)
-    var recommendationType: ShortcutRecTypeAppEnum
+    var recommendationType: RecType
 
     @Parameter(title: "Author")
     var author: String?
@@ -57,8 +56,7 @@ struct ShortcutIntent: AppIntent, CustomIntentMigratedAppIntent {
     }
 
     @MainActor
-    func perform() async throws -> some IntentResult {
-        // TODO: Place your refactored intent handler code here.
+    func perform() async throws -> some IntentResult & ReturnsValue<RecommendationEntity> {
         let viewContext = PersistenceController.shared.container.viewContext
         let newItem = Item(context: viewContext)
         newItem.id = UUID()
@@ -69,38 +67,28 @@ struct ShortcutIntent: AppIntent, CustomIntentMigratedAppIntent {
                                 : recommender!.trimmingCharacters(in: .whitespacesAndNewlines)
         newItem.recommendationDate = recommendedOn ?? Date()
         newItem.notes = notes == nil ? "" : notes!.trimmingCharacters(in: .whitespacesAndNewlines)
-        newItem.type = RecType(
-                            rawValue: recommendationType.rawValue
-                        )?.description ?? ShortcutRecTypeAppEnum.movie.rawValue
+        newItem.type = recommendationType.description
         do {
             try viewContext.save()
-            saveItemCounts(context: viewContext)
         } catch {
             print("Failed to save new item")
+            viewContext.rollback()
             throw ShortcutIntentSaveError.saveError
         }
-        return .result()
+        RecommendationSync.shared.syncNow()
+        guard let entity = RecommendationEntity(item: newItem) else {
+            throw ShortcutIntentSaveError.saveError
+        }
+        return .result(value: entity)
     }
 }
 
-@available(iOS 16.0, macOS 13.0, watchOS 9.0, tvOS 16.0, *)
 extension ShortcutIntent {
-    init(recommendationType: ShortcutRecTypeAppEnum? = nil) {
+    init(recommendationType: RecType? = nil) {
         self.recommendationType = recommendationType ?? .movie
     }
 }
 
-@available(iOS 16.0, macOS 13.0, watchOS 9.0, tvOS 16.0, *)
-fileprivate extension IntentDialog {
-    static func recommendationTypeParameterDisambiguationIntro(count: Int, recommendationType: ShortcutRecTypeAppEnum) -> Self {
-        "There are \(count) options matching ‘\(recommendationType)’."
-    }
-    static func recommendationTypeParameterConfirmation(recommendationType: ShortcutRecTypeAppEnum) -> Self {
-        "Just to confirm, you wanted ‘\(recommendationType)’?"
-    }
-}
-
-@available(iOS 16.0, macOS 13.0, watchOS 9.0, tvOS 16.0, *)
 enum ShortcutIntentSaveError: Swift.Error, CustomLocalizedStringResourceConvertible {
     case saveError
 
@@ -113,4 +101,3 @@ enum ShortcutIntentSaveError: Swift.Error, CustomLocalizedStringResourceConverti
         )
     }
 }
-

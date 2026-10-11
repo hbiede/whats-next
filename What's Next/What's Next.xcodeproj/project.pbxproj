@@ -7,29 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F17E19A04E1036BD9C58541 /* SharedRecommendations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357795876736AA9D7A34A079 /* SharedRecommendations.swift */; };
+		2C5663A4ED4FB31EEBB2EB0F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 158FE129F41C92F980E6773C /* Localizable.xcstrings */; };
+		30D678BB2ACC9C1E383EDAD8 /* RecommendationSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64068735B3608072A06880AD /* RecommendationSync.swift */; };
+		36979B82DC9873B142F41E88 /* SharedRecommendations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357795876736AA9D7A34A079 /* SharedRecommendations.swift */; };
+		387396ED69E6C915678269F3 /* RecommendationSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64068735B3608072A06880AD /* RecommendationSync.swift */; };
+		39EC3C91466EC77F2F9946D4 /* AppShortcuts.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C4218C20A7732DDCAD6A2539 /* AppShortcuts.xcstrings */; };
 		3E09A28329256D1600719EE2 /* ShortcutIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E09A28129256D1600719EE2 /* ShortcutIntent.swift */; };
 		3E09A28429256D1600719EE2 /* ShortcutIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E09A28129256D1600719EE2 /* ShortcutIntent.swift */; };
-		3E09A28529256D1600719EE2 /* ShortcutRecTypeAppEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E09A28229256D1600719EE2 /* ShortcutRecTypeAppEnum.swift */; };
-		3E09A28629256D1600719EE2 /* ShortcutRecTypeAppEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E09A28229256D1600719EE2 /* ShortcutRecTypeAppEnum.swift */; };
-		3E09A287292583DE00719EE2 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 3E09A28A292583DE00719EE2 /* Intents.intentdefinition */; };
-		3E09A288292583DE00719EE2 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 3E09A28A292583DE00719EE2 /* Intents.intentdefinition */; };
-		3E09A2952925D15F00719EE2 /* AppShortcuts.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E09A2982925D15F00719EE2 /* AppShortcuts.strings */; };
-		3E09A2962925D15F00719EE2 /* AppShortcuts.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E09A2982925D15F00719EE2 /* AppShortcuts.strings */; };
 		3E09A29B2925D1D300719EE2 /* ShortcutProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E09A29A2925D1D300719EE2 /* ShortcutProvider.swift */; };
 		3E09A29C2925D1D300719EE2 /* ShortcutProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E09A29A2925D1D300719EE2 /* ShortcutProvider.swift */; };
 		3EA215582919F02200633654 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC3004B29170F5B00500420 /* WidgetKit.framework */; };
 		3EA215592919F02200633654 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC3004D29170F5B00500420 /* SwiftUI.framework */; };
 		3EA2155C2919F02200633654 /* WidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA2155B2919F02200633654 /* WidgetBundle.swift */; };
 		3EA2155E2919F02200633654 /* CombinedWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA2155D2919F02200633654 /* CombinedWidgetProvider.swift */; };
-		3EA215632919F02300633654 /* Widget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 3EA2155F2919F02200633654 /* Widget.intentdefinition */; };
-		3EA215642919F02300633654 /* Widget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 3EA2155F2919F02200633654 /* Widget.intentdefinition */; };
 		3EA215672919F02300633654 /* WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3EA215572919F02200633654 /* WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		3EA21570291A11D900633654 /* What_s_Next.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C3C8A822267C1CD1007D9512 /* What_s_Next.xcdatamodeld */; };
 		3EA21571291A15C300633654 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = C322EFD5267C5BAC00D42C86 /* Types.swift */; };
 		3EA21574291A168300633654 /* CombinedWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA21573291A168300633654 /* CombinedWidgetView.swift */; };
 		3EA21576291A16C800633654 /* CountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA21575291A16C800633654 /* CountView.swift */; };
-		3EA21577291A1E3000633654 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C8A826267C1CD1007D9512 /* Persistence.swift */; };
-		3EA21578291A26E100633654 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C33439B22683DE9400A8F4CB /* Localizable.strings */; };
 		3EA21579291A296E00633654 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3C8A827267C1CD1007D9512 /* Assets.xcassets */; };
 		3EA2157A291A2D3A00633654 /* QuickActionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA3AB70287F2A5B00CAF61C /* QuickActionSettings.swift */; };
 		3EA2157E291AA19B00633654 /* SingleWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA2157D291AA19B00633654 /* SingleWidgetProvider.swift */; };
@@ -40,6 +35,25 @@
 		3EA21586291AA40F00633654 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA21583291AA40B00633654 /* Constants.swift */; };
 		3EA3AB71287F2A5B00CAF61C /* QuickActionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA3AB70287F2A5B00CAF61C /* QuickActionSettings.swift */; };
 		3EA3AB72287F2A5B00CAF61C /* QuickActionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA3AB70287F2A5B00CAF61C /* QuickActionSettings.swift */; };
+		44DD01610BBD8B21E0E19C51 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 158FE129F41C92F980E6773C /* Localizable.xcstrings */; };
+		483A15B4E73B24FD715A23C0 /* AppIntentsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA90F837F35F3272C7407AC /* AppIntentsTests.swift */; };
+		54AECC797EB911347DB3E3C6 /* GetNextRecommendationIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273A06DCC8E9687740754AD9 /* GetNextRecommendationIntent.swift */; };
+		55CF56941717DABCFDF1E7E8 /* DeleteRecommendationsIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224BB10BDC90E0ADABC0A333 /* DeleteRecommendationsIntent.swift */; };
+		63BAB76241BB3A5F8F40DEA0 /* GetNextRecommendationIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273A06DCC8E9687740754AD9 /* GetNextRecommendationIntent.swift */; };
+		65A0DD5D0A20961338F9A52E /* TestSupportIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CE5FAFB2F0AF0CB88AF3CB /* TestSupportIntents.swift */; };
+		66326BBD12101B6356520764 /* AppShortcuts.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C4218C20A7732DDCAD6A2539 /* AppShortcuts.xcstrings */; };
+		68A81FFCC9786D72509B8412 /* AddRecommendationControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C62E94F3799E6354B54361 /* AddRecommendationControl.swift */; };
+		6B5F172185110BE2432FFE6A /* DeleteRecommendationsIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224BB10BDC90E0ADABC0A333 /* DeleteRecommendationsIntent.swift */; };
+		6F235D1CFA787C384FCB2374 /* SharedRecommendations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357795876736AA9D7A34A079 /* SharedRecommendations.swift */; };
+		702BE2F038D51E0C6A14BBED /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 158FE129F41C92F980E6773C /* Localizable.xcstrings */; };
+		7743AF4A49F106582EB5D368 /* WidgetConfigurationIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF6FFF1A4E46BB69B42A83 /* WidgetConfigurationIntents.swift */; };
+		7D18B1BCAF797449B52B2B2D /* PickWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E46D7CF7DA671F53A1F5412 /* PickWidgetView.swift */; };
+		89BF7D7EBB11923F146BA31D /* TestSupportIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CE5FAFB2F0AF0CB88AF3CB /* TestSupportIntents.swift */; };
+		8A1782CFB61921FC63BD607F /* RecommendationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F70D1F4E13D444B9E2D8160 /* RecommendationEntity.swift */; };
+		91378C1365E2C6E690178D68 /* OpenAddRecommendationIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BEA26EA17743692FA96A1A /* OpenAddRecommendationIntent.swift */; };
+		98EA35F779253B18E328E158 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 158FE129F41C92F980E6773C /* Localizable.xcstrings */; };
+		9DC67244882AAD1DD136F263 /* PickWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1EA4B3D540037A1FC3CACB3 /* PickWidgetProvider.swift */; };
+		BDFD402E070EE75112236437 /* OpenRecommendationIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A155974F1070DACB40B863FA /* OpenRecommendationIntent.swift */; };
 		C322EFC9267C32CD00D42C86 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C322EFC8267C32CD00D42C86 /* MainScreenView.swift */; };
 		C322EFCA267C32CD00D42C86 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C322EFC8267C32CD00D42C86 /* MainScreenView.swift */; };
 		C322EFCC267C4A1900D42C86 /* AddRecScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C322EFCB267C4A1900D42C86 /* AddRecScreen.swift */; };
@@ -52,11 +66,8 @@
 		C325E14226838CA300067AF1 /* ItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C325E14126838CA300067AF1 /* ItemDetailView.swift */; };
 		C325E14326838CA300067AF1 /* ItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C325E14126838CA300067AF1 /* ItemDetailView.swift */; };
 		C325E1472683BEE400067AF1 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C325E1462683BEE400067AF1 /* SnapshotHelper.swift */; };
-		C33439AF2683DE9400A8F4CB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C33439B22683DE9400A8F4CB /* Localizable.strings */; };
-		C33439B02683DE9400A8F4CB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C33439B22683DE9400A8F4CB /* Localizable.strings */; };
 		C356AA60268D609E0050E32A /* Filterer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C356AA5F268D609E0050E32A /* Filterer.swift */; };
 		C356AA61268D609E0050E32A /* Filterer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C356AA5F268D609E0050E32A /* Filterer.swift */; };
-		C356AA67268D71130050E32A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C33439B22683DE9400A8F4CB /* Localizable.strings */; };
 		C3708518268155CB0029CC3E /* WhatsNextApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C8A824267C1CD1007D9512 /* WhatsNextApp.swift */; };
 		C3C8A84E267C1CD2007D9512 /* What_s_Next.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C3C8A822267C1CD1007D9512 /* What_s_Next.xcdatamodeld */; };
 		C3C8A84F267C1CD2007D9512 /* What_s_Next.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C3C8A822267C1CD1007D9512 /* What_s_Next.xcdatamodeld */; };
@@ -67,6 +78,10 @@
 		C3C8A855267C1CD2007D9512 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C8A826267C1CD1007D9512 /* Persistence.swift */; };
 		C3C8A856267C1CD2007D9512 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3C8A827267C1CD1007D9512 /* Assets.xcassets */; };
 		C3C8A857267C1CD2007D9512 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3C8A827267C1CD1007D9512 /* Assets.xcassets */; };
+		CC36BB89CFFD23D3531C57D8 /* RecommendationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F70D1F4E13D444B9E2D8160 /* RecommendationEntity.swift */; };
+		D60D78EFDE8BB8B6F6B9F1F7 /* OpenAddRecommendationIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BEA26EA17743692FA96A1A /* OpenAddRecommendationIntent.swift */; };
+		EC673A9928067BD108533824 /* OpenAddRecommendationIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BEA26EA17743692FA96A1A /* OpenAddRecommendationIntent.swift */; };
+		F71B084672039C3B67DFE062 /* OpenRecommendationIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A155974F1070DACB40B863FA /* OpenRecommendationIntent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,19 +116,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0E46D7CF7DA671F53A1F5412 /* PickWidgetView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PickWidgetView.swift; sourceTree = "<group>"; };
+		158FE129F41C92F980E6773C /* Localizable.xcstrings */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		224BB10BDC90E0ADABC0A333 /* DeleteRecommendationsIntent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DeleteRecommendationsIntent.swift; sourceTree = "<group>"; };
+		273A06DCC8E9687740754AD9 /* GetNextRecommendationIntent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GetNextRecommendationIntent.swift; sourceTree = "<group>"; };
+		357795876736AA9D7A34A079 /* SharedRecommendations.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SharedRecommendations.swift; sourceTree = "<group>"; };
 		3E09A28129256D1600719EE2 /* ShortcutIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutIntent.swift; sourceTree = "<group>"; };
-		3E09A28229256D1600719EE2 /* ShortcutRecTypeAppEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutRecTypeAppEnum.swift; sourceTree = "<group>"; };
-		3E09A28D2925864800719EE2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = Base; path = Base.lproj/Intents.intentdefinition; sourceTree = "<group>"; };
-		3E09A28F2925867700719EE2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Intents.strings; sourceTree = "<group>"; };
-		3E09A29129258AD700719EE2 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Intents.strings; sourceTree = "<group>"; };
-		3E09A2972925D15F00719EE2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AppShortcuts.strings; sourceTree = "<group>"; };
-		3E09A2992925D16200719EE2 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/AppShortcuts.strings; sourceTree = "<group>"; };
 		3E09A29A2925D1D300719EE2 /* ShortcutProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutProvider.swift; sourceTree = "<group>"; };
 		3E52F6E0287F2FEB00E802AB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3EA215572919F02200633654 /* WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EA2155B2919F02200633654 /* WidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBundle.swift; sourceTree = "<group>"; };
 		3EA2155D2919F02200633654 /* CombinedWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedWidgetProvider.swift; sourceTree = "<group>"; };
-		3EA2155F2919F02200633654 /* Widget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Widget.intentdefinition; sourceTree = "<group>"; };
 		3EA215622919F02300633654 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3EA21573291A168300633654 /* CombinedWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedWidgetView.swift; sourceTree = "<group>"; };
 		3EA21575291A16C800633654 /* CountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountView.swift; sourceTree = "<group>"; };
@@ -125,6 +138,12 @@
 		3EA3AB70287F2A5B00CAF61C /* QuickActionSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickActionSettings.swift; sourceTree = "<group>"; };
 		3EC3004B29170F5B00500420 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		3EC3004D29170F5B00500420 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		61C62E94F3799E6354B54361 /* AddRecommendationControl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AddRecommendationControl.swift; sourceTree = "<group>"; };
+		64068735B3608072A06880AD /* RecommendationSync.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RecommendationSync.swift; sourceTree = "<group>"; };
+		6F70D1F4E13D444B9E2D8160 /* RecommendationEntity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RecommendationEntity.swift; sourceTree = "<group>"; };
+		8AFF6FFF1A4E46BB69B42A83 /* WidgetConfigurationIntents.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WidgetConfigurationIntents.swift; sourceTree = "<group>"; };
+		A155974F1070DACB40B863FA /* OpenRecommendationIntent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OpenRecommendationIntent.swift; sourceTree = "<group>"; };
+		BDA90F837F35F3272C7407AC /* AppIntentsTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppIntentsTests.swift; sourceTree = "<group>"; };
 		C322EFC8267C32CD00D42C86 /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 		C322EFCB267C4A1900D42C86 /* AddRecScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecScreen.swift; sourceTree = "<group>"; };
 		C322EFCE267C4A4A00D42C86 /* UpNextScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpNextScreen.swift; sourceTree = "<group>"; };
@@ -133,8 +152,6 @@
 		C325E13A2682964700067AF1 /* WhatsNextUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNextUITests.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		C325E14126838CA300067AF1 /* ItemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailView.swift; sourceTree = "<group>"; };
 		C325E1462683BEE400067AF1 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
-		C33439B12683DE9400A8F4CB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		C33439B52683E31900A8F4CB /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C356AA5F268D609E0050E32A /* Filterer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filterer.swift; sourceTree = "<group>"; };
 		C3C8A823267C1CD1007D9512 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		C3C8A824267C1CD1007D9512 /* WhatsNextApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNextApp.swift; sourceTree = "<group>"; };
@@ -146,6 +163,10 @@
 		C3C8A836267C1CD2007D9512 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C3C8A837267C1CD2007D9512 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		C3C8A86C267C2556007D9512 /* What's Next.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "What's Next.entitlements"; sourceTree = "<group>"; };
+		C4218C20A7732DDCAD6A2539 /* AppShortcuts.xcstrings */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json.xcstrings; path = AppShortcuts.xcstrings; sourceTree = "<group>"; };
+		C8BEA26EA17743692FA96A1A /* OpenAddRecommendationIntent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OpenAddRecommendationIntent.swift; sourceTree = "<group>"; };
+		D1EA4B3D540037A1FC3CACB3 /* PickWidgetProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PickWidgetProvider.swift; sourceTree = "<group>"; };
+		F5CE5FAFB2F0AF0CB88AF3CB /* TestSupportIntents.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TestSupportIntents.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,14 +203,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F41C4E8773F1B2E067F6A7F /* PickWidget */ = {
+			isa = PBXGroup;
+			children = (
+				D1EA4B3D540037A1FC3CACB3 /* PickWidgetProvider.swift */,
+				0E46D7CF7DA671F53A1F5412 /* PickWidgetView.swift */,
+			);
+			name = PickWidget;
+			path = PickWidget;
+			sourceTree = "<group>";
+		};
 		3E74CC2F292569880040E00C /* Intents */ = {
 			isa = PBXGroup;
 			children = (
 				3E09A28129256D1600719EE2 /* ShortcutIntent.swift */,
 				3E09A29A2925D1D300719EE2 /* ShortcutProvider.swift */,
-				3E09A28229256D1600719EE2 /* ShortcutRecTypeAppEnum.swift */,
-				3E09A28A292583DE00719EE2 /* Intents.intentdefinition */,
-				3E09A2982925D15F00719EE2 /* AppShortcuts.strings */,
+				6F70D1F4E13D444B9E2D8160 /* RecommendationEntity.swift */,
+				273A06DCC8E9687740754AD9 /* GetNextRecommendationIntent.swift */,
+				A155974F1070DACB40B863FA /* OpenRecommendationIntent.swift */,
+				224BB10BDC90E0ADABC0A333 /* DeleteRecommendationsIntent.swift */,
+				F5CE5FAFB2F0AF0CB88AF3CB /* TestSupportIntents.swift */,
+				C8BEA26EA17743692FA96A1A /* OpenAddRecommendationIntent.swift */,
+				C4218C20A7732DDCAD6A2539 /* AppShortcuts.xcstrings */,
 			);
 			path = Intents;
 			sourceTree = "<group>";
@@ -200,9 +235,11 @@
 				3EA21572291A165F00633654 /* CombinedWidget */,
 				3EA2157C291AA13A00633654 /* SingleWidget */,
 				3EA2155B2919F02200633654 /* WidgetBundle.swift */,
-				3EA2155F2919F02200633654 /* Widget.intentdefinition */,
 				3EA215622919F02300633654 /* Info.plist */,
 				3EA2157F291AA21700633654 /* WidgetTypes.swift */,
+				0F41C4E8773F1B2E067F6A7F /* PickWidget */,
+				8AFF6FFF1A4E46BB69B42A83 /* WidgetConfigurationIntents.swift */,
+				61C62E94F3799E6354B54361 /* AddRecommendationControl.swift */,
 			);
 			path = Widget;
 			sourceTree = "<group>";
@@ -252,6 +289,7 @@
 			children = (
 				C325E1462683BEE400067AF1 /* SnapshotHelper.swift */,
 				C325E13A2682964700067AF1 /* WhatsNextUITests.swift */,
+				BDA90F837F35F3272C7407AC /* AppIntentsTests.swift */,
 			);
 			path = "What's NextUITests";
 			sourceTree = "<group>";
@@ -259,7 +297,7 @@
 		C33439B42683E2D100A8F4CB /* Strings */ = {
 			isa = PBXGroup;
 			children = (
-				C33439B22683DE9400A8F4CB /* Localizable.strings */,
+				158FE129F41C92F980E6773C /* Localizable.xcstrings */,
 			);
 			path = Strings;
 			sourceTree = "<group>";
@@ -293,6 +331,8 @@
 				C3C8A824267C1CD1007D9512 /* WhatsNextApp.swift */,
 				C322EFD5267C5BAC00D42C86 /* Types.swift */,
 				3EA3AB70287F2A5B00CAF61C /* QuickActionSettings.swift */,
+				357795876736AA9D7A34A079 /* SharedRecommendations.swift */,
+				64068735B3608072A06880AD /* RecommendationSync.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -453,7 +493,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3EA21579291A296E00633654 /* Assets.xcassets in Resources */,
-				3EA21578291A26E100633654 /* Localizable.strings in Resources */,
+				2C5663A4ED4FB31EEBB2EB0F /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,7 +501,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C356AA67268D71130050E32A /* Localizable.strings in Resources */,
+				98EA35F779253B18E328E158 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,9 +509,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C33439AF2683DE9400A8F4CB /* Localizable.strings in Resources */,
-				3E09A2952925D15F00719EE2 /* AppShortcuts.strings in Resources */,
 				C3C8A856267C1CD2007D9512 /* Assets.xcassets in Resources */,
+				44DD01610BBD8B21E0E19C51 /* Localizable.xcstrings in Resources */,
+				39EC3C91466EC77F2F9946D4 /* AppShortcuts.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,9 +519,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C33439B02683DE9400A8F4CB /* Localizable.strings in Resources */,
-				3E09A2962925D15F00719EE2 /* AppShortcuts.strings in Resources */,
 				C3C8A857267C1CD2007D9512 /* Assets.xcassets in Resources */,
+				702BE2F038D51E0C6A14BBED /* Localizable.xcstrings in Resources */,
+				66326BBD12101B6356520764 /* AppShortcuts.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,7 +532,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3EA21570291A11D900633654 /* What_s_Next.xcdatamodeld in Sources */,
 				3EA21574291A168300633654 /* CombinedWidgetView.swift in Sources */,
 				3EA21580291AA21700633654 /* WidgetTypes.swift in Sources */,
 				3EA21571291A15C300633654 /* Types.swift in Sources */,
@@ -500,11 +539,15 @@
 				3EA2155C2919F02200633654 /* WidgetBundle.swift in Sources */,
 				3EA2157E291AA19B00633654 /* SingleWidgetProvider.swift in Sources */,
 				3EA2155E2919F02200633654 /* CombinedWidgetProvider.swift in Sources */,
-				3EA215632919F02300633654 /* Widget.intentdefinition in Sources */,
 				3EA21582291AA2C900633654 /* SingleWidgetView.swift in Sources */,
 				3EA21584291AA40B00633654 /* Constants.swift in Sources */,
 				3EA21576291A16C800633654 /* CountView.swift in Sources */,
-				3EA21577291A1E3000633654 /* Persistence.swift in Sources */,
+				1F17E19A04E1036BD9C58541 /* SharedRecommendations.swift in Sources */,
+				D60D78EFDE8BB8B6F6B9F1F7 /* OpenAddRecommendationIntent.swift in Sources */,
+				7743AF4A49F106582EB5D368 /* WidgetConfigurationIntents.swift in Sources */,
+				68A81FFCC9786D72509B8412 /* AddRecommendationControl.swift in Sources */,
+				9DC67244882AAD1DD136F263 /* PickWidgetProvider.swift in Sources */,
+				7D18B1BCAF797449B52B2B2D /* PickWidgetView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -514,6 +557,7 @@
 			files = (
 				C325E13B2682964700067AF1 /* WhatsNextUITests.swift in Sources */,
 				C325E1472683BEE400067AF1 /* SnapshotHelper.swift in Sources */,
+				483A15B4E73B24FD715A23C0 /* AppIntentsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -521,23 +565,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E09A287292583DE00719EE2 /* Intents.intentdefinition in Sources */,
 				C3C8A850267C1CD2007D9512 /* WhatsNextApp.swift in Sources */,
 				C322EFC9267C32CD00D42C86 /* MainScreenView.swift in Sources */,
 				C322EFCC267C4A1900D42C86 /* AddRecScreen.swift in Sources */,
 				C325E14226838CA300067AF1 /* ItemDetailView.swift in Sources */,
-				3E09A28529256D1600719EE2 /* ShortcutRecTypeAppEnum.swift in Sources */,
 				C356AA60268D609E0050E32A /* Filterer.swift in Sources */,
 				C322EFCF267C4A4A00D42C86 /* UpNextScreen.swift in Sources */,
 				C3C8A854267C1CD2007D9512 /* Persistence.swift in Sources */,
 				3E09A29B2925D1D300719EE2 /* ShortcutProvider.swift in Sources */,
 				3EA21585291AA40E00633654 /* Constants.swift in Sources */,
 				3EA3AB71287F2A5B00CAF61C /* QuickActionSettings.swift in Sources */,
-				3EA215642919F02300633654 /* Widget.intentdefinition in Sources */,
 				3E09A28329256D1600719EE2 /* ShortcutIntent.swift in Sources */,
 				C3C8A84E267C1CD2007D9512 /* What_s_Next.xcdatamodeld in Sources */,
 				C322EFD6267C5BAC00D42C86 /* Types.swift in Sources */,
 				C3C8A852267C1CD2007D9512 /* ItemListView.swift in Sources */,
+				36979B82DC9873B142F41E88 /* SharedRecommendations.swift in Sources */,
+				30D678BB2ACC9C1E383EDAD8 /* RecommendationSync.swift in Sources */,
+				CC36BB89CFFD23D3531C57D8 /* RecommendationEntity.swift in Sources */,
+				63BAB76241BB3A5F8F40DEA0 /* GetNextRecommendationIntent.swift in Sources */,
+				BDFD402E070EE75112236437 /* OpenRecommendationIntent.swift in Sources */,
+				6B5F172185110BE2432FFE6A /* DeleteRecommendationsIntent.swift in Sources */,
+				89BF7D7EBB11923F146BA31D /* TestSupportIntents.swift in Sources */,
+				EC673A9928067BD108533824 /* OpenAddRecommendationIntent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,7 +600,6 @@
 				3E09A28429256D1600719EE2 /* ShortcutIntent.swift in Sources */,
 				C325E14326838CA300067AF1 /* ItemDetailView.swift in Sources */,
 				C356AA61268D609E0050E32A /* Filterer.swift in Sources */,
-				3E09A28629256D1600719EE2 /* ShortcutRecTypeAppEnum.swift in Sources */,
 				C3C8A855267C1CD2007D9512 /* Persistence.swift in Sources */,
 				3E09A29C2925D1D300719EE2 /* ShortcutProvider.swift in Sources */,
 				C3708518268155CB0029CC3E /* WhatsNextApp.swift in Sources */,
@@ -559,8 +607,15 @@
 				C3C8A84F267C1CD2007D9512 /* What_s_Next.xcdatamodeld in Sources */,
 				C322EFD7267C5BAC00D42C86 /* Types.swift in Sources */,
 				C3C8A853267C1CD2007D9512 /* ItemListView.swift in Sources */,
-				3E09A288292583DE00719EE2 /* Intents.intentdefinition in Sources */,
 				3EA21586291AA40F00633654 /* Constants.swift in Sources */,
+				6F235D1CFA787C384FCB2374 /* SharedRecommendations.swift in Sources */,
+				387396ED69E6C915678269F3 /* RecommendationSync.swift in Sources */,
+				8A1782CFB61921FC63BD607F /* RecommendationEntity.swift in Sources */,
+				54AECC797EB911347DB3E3C6 /* GetNextRecommendationIntent.swift in Sources */,
+				F71B084672039C3B67DFE062 /* OpenRecommendationIntent.swift in Sources */,
+				55CF56941717DABCFDF1E7E8 /* DeleteRecommendationsIntent.swift in Sources */,
+				65A0DD5D0A20961338F9A52E /* TestSupportIntents.swift in Sources */,
+				91378C1365E2C6E690178D68 /* OpenAddRecommendationIntent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,37 +633,6 @@
 			targetProxy = C325E13C2682964700067AF1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		3E09A28A292583DE00719EE2 /* Intents.intentdefinition */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3E09A28D2925864800719EE2 /* Base */,
-				3E09A28F2925867700719EE2 /* en */,
-				3E09A29129258AD700719EE2 /* es */,
-			);
-			name = Intents.intentdefinition;
-			sourceTree = "<group>";
-		};
-		3E09A2982925D15F00719EE2 /* AppShortcuts.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3E09A2972925D15F00719EE2 /* en */,
-				3E09A2992925D16200719EE2 /* es */,
-			);
-			name = AppShortcuts.strings;
-			sourceTree = "<group>";
-		};
-		C33439B22683DE9400A8F4CB /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C33439B12683DE9400A8F4CB /* en */,
-				C33439B52683E31900A8F4CB /* es */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		3EA215692919F02300633654 /* Debug */ = {
@@ -636,6 +660,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -666,6 +691,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -682,7 +708,7 @@
 				INFOPLIST_KEY_CFBundleExecutable = "What's NextUITests";
 				INFOPLIST_KEY_CFBundleName = "What's Next UI Tests";
 				INFOPLIST_KEY_CFBundleVersion = "$(BUILD_NUMBER)";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -712,7 +738,7 @@
 				INFOPLIST_KEY_CFBundleExecutable = "What's NextUITests";
 				INFOPLIST_KEY_CFBundleName = "What's Next UI Tests";
 				INFOPLIST_KEY_CFBundleVersion = "$(BUILD_NUMBER)";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -790,6 +816,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -853,6 +880,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -887,6 +915,8 @@
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -915,6 +945,8 @@
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -945,6 +977,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hbiede.WhatsNext;
 				PRODUCT_NAME = "What's Next";
 				SDKROOT = macosx;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 			};
 			name = Debug;
 		};
@@ -973,6 +1007,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hbiede.WhatsNext;
 				PRODUCT_NAME = "What's Next";
 				SDKROOT = macosx;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 			};
 			name = Release;
 		};

@@ -5,6 +5,7 @@
 //  Created by Hundter Biede on 6/17/21.
 //
 
+import AppIntents
 import SwiftUI
 import CoreData
 
@@ -27,22 +28,22 @@ struct ItemListView: View {
             ) { (sectionKey, sectionItems) in
                 Section(header: Text(NSLocalizedString(sectionKey, comment: "The name of the type"))) {
                     ForEach(sectionItems) { item in
-                        if item.id != nil && item.name != nil {
+                        if let id = item.id, item.name != nil {
                             NavigationLink(destination: ItemDetailView(item: item)) {
                                 ItemListEntry(item: item)
                             }
-                            #if os(iOS)
-                                .isDetailLink(true)
-                            #endif
+                            .appEntityIdentifier(RecommendationEntity.identifier(for: id))
                         }
                     }
-                    .onDelete(perform: deleteItems)
+                    // Offsets count within this section, not within all of `items`
+                    .onDelete { offsets in
+                        deleteItems(offsets.map { sectionItems[$0] })
+                    }
                 }
             }
         }
         #if os(iOS)
         .listStyle(.insetGrouped)
-        .navigationViewStyle(StackNavigationViewStyle())
         .toolbar {
             NavigationLink(destination: AddRecScreen()) {
                 Image(systemName: "plus")
@@ -53,31 +54,28 @@ struct ItemListView: View {
     }
 
     // MARK: Delete
-    private func deleteItems(offsets: IndexSet) {
+    private func deleteItems(_ itemsToDelete: [Item]) {
         withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
+            let isDeletingEverything = itemsToDelete.count == items.count
+            itemsToDelete.forEach(viewContext.delete)
 
             do {
                 try viewContext.save()
-                viewContext.reset()
-                saveItemCounts(context: viewContext)
-                if items.count == 0 {
+                if isDeletingEverything {
                     // Go back if list is empty
                     self.dismiss()
                 }
             } catch {
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                print("Failed to delete: \(error)")
+                viewContext.rollback()
             }
         }
     }
 }
 
 #if DEBUG
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ItemListView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-    }
+#Preview {
+    ItemListView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
 }
 #endif
 

@@ -16,8 +16,8 @@
 import Foundation
 import XCTest
 
-var deviceLanguage = ""
-var locale = ""
+nonisolated(unsafe) var deviceLanguage = ""
+nonisolated(unsafe) var locale = ""
 
 func getLanguage() -> String {
     return Snapshot.getLanguage()
@@ -58,9 +58,9 @@ enum SnapshotError: Error, CustomDebugStringConvertible {
 
 @objcMembers
 open class Snapshot: NSObject {
-    static var app: XCUIApplication?
-    static var waitForAnimations = true
-    static var cacheDirectory: URL?
+    nonisolated(unsafe) static var app: XCUIApplication?
+    nonisolated(unsafe) static var waitForAnimations = true
+    nonisolated(unsafe) static var cacheDirectory: URL?
     static var screenshotsDirectory: URL? {
         return cacheDirectory?.appendingPathComponent("screenshots", isDirectory: true)
     }
@@ -181,14 +181,14 @@ open class Snapshot: NSObject {
             app.typeKey(XCUIKeyboardKeySecondaryFn, modifierFlags: [])
         #else
 
-            guard self.app != nil else {
+            guard let app = self.app else {
                 NSLog("XCUIApplication is not set. Please call setupSnapshot(app) before snapshot().")
                 return
             }
 
-            let screenshot = XCUIScreen.main.screenshot()
+            let (screenshot, displaySuffix) = appScreenScreenshot(app)
             #if os(iOS) && !targetEnvironment(macCatalyst)
-            let image = XCUIDevice.shared.orientation.isLandscape ?  fixLandscapeOrientation(image: screenshot.image) : screenshot.image
+            let image = padToWholePoints(image: XCUIDevice.shared.orientation.isLandscape ?  fixLandscapeOrientation(image: screenshot.image) : screenshot.image)
             #else
             let image = screenshot.image
             #endif
@@ -201,6 +201,8 @@ open class Snapshot: NSObject {
                 let range = NSRange(location: 0, length: simulator.count)
                 simulator = regex.stringByReplacingMatches(in: simulator, range: range, withTemplate: "")
 
+                simulator += displaySuffix
+
                 let path = screenshotsDir.appendingPathComponent("\(simulator)-\(name).png")
                 #if swift(<5.0)
                     UIImagePNGRepresentation(image)?.write(to: path, options: .atomic)
@@ -212,6 +214,59 @@ open class Snapshot: NSObject {
                 NSLog(error.localizedDescription)
             }
         #endif
+    }
+
+    /// Screenshot of the screen showing the app, plus a file name suffix telling an iPhone Duo's displays apart.
+    /// The Duo has an outer display (used folded) and an inner display (used unfolded), and `XCUIScreen.main`
+    /// isn't necessarily the one the app is on, so match each screen against the app's frame.
+    class func appScreenScreenshot(_ app: XCUIApplication) -> (XCUIScreenshot, String) {
+        let screens = XCUIScreen.screens
+        guard screens.count > 1 else { return (XCUIScreen.main.screenshot(), "") }
+
+        let appSize = app.frame.size
+        let screenshots = screens.map { $0.screenshot() }
+        let matches = { (size: CGSize) in
+            (abs(size.width - appSize.width) <= 1 && abs(size.height - appSize.height) <= 1) ||
+                (abs(size.width - appSize.height) <= 1 && abs(size.height - appSize.width) <= 1)
+        }
+        guard let screenshot = screenshots.first(where: { matches($0.image.size) }) else {
+            return (XCUIScreen.main.screenshot(), "")
+        }
+
+        #if os(iOS)
+        guard UIDevice.current.userInterfaceIdiom == .phone else { return (screenshot, "") }
+        let area = { (shot: XCUIScreenshot) in shot.image.size.width * shot.image.size.height }
+        let isLargest = screenshots.allSatisfy { area($0) <= area(screenshot) }
+        return (screenshot, isLargest ? " (Unfolded)" : " (Folded)")
+        #else
+        return (screenshot, "")
+        #endif
+    }
+
+    /// XCUIScreen reports iPhone Duo's inner display as 668.67 × 950.67 pt, so its screenshots come out 2006 × 2852 px
+    /// instead of the 2007 × 2853 px App Store Connect requires. Pad fractional sizes out to whole points by repeating
+    /// the last row and column of pixels.
+    class func padToWholePoints(image: UIImage) -> UIImage {
+        let scale = Int(image.scale.rounded())
+        guard scale > 0 else { return image }
+        let roundUp = { (points: CGFloat) -> CGFloat in
+            let pixels = Int((points * image.scale).rounded())
+            return CGFloat((pixels + scale - 1) / scale)
+        }
+        let size = CGSize(width: roundUp(image.size.width), height: roundUp(image.size.height))
+        guard size.width > image.size.width || size.height > image.size.height else { return image }
+
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = image.scale
+        format.opaque = true
+        let renderer = UIGraphicsImageRenderer(size: size, format: format)
+        return renderer.image { _ in
+            let padding = CGPoint(x: size.width - image.size.width, y: size.height - image.size.height)
+            image.draw(at: padding)
+            image.draw(at: CGPoint(x: padding.x, y: 0))
+            image.draw(at: CGPoint(x: 0, y: padding.y))
+            image.draw(at: .zero)
+        }
     }
 
     class func fixLandscapeOrientation(image: UIImage) -> UIImage {

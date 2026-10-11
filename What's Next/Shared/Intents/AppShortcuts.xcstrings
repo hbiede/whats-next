@@ -1,0 +1,78 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Add Recommendation in ${applicationName}" : {
+      "comment" : "AppShortcuts.strings\n  What's Next\n\n  Created by Hundter Biede on 11/16/22.\n  Copyright © 2022 com.hbiede. All rights reserved.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add Recommendation in ${applicationName}"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agregar Recomendación en ${applicationName}"
+          }
+        }
+      }
+    },
+    "Get a recommendation from ${applicationName}" : {
+      "comment" : "Siri phrase for picking a random recommendation",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get a recommendation from ${applicationName}"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dame una recomendación de ${applicationName}"
+          }
+        }
+      }
+    },
+    "What ${recommendationType} should I try next in ${applicationName}" : {
+      "comment" : "Siri phrase for picking a random recommendation of a type",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What ${recommendationType} should I try next in ${applicationName}"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qué ${recommendationType} debería probar después en ${applicationName}"
+          }
+        }
+      }
+    },
+    "What should I try next in ${applicationName}" : {
+      "comment" : "Siri phrase for picking a random recommendation",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What should I try next in ${applicationName}"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qué debería probar después en ${applicationName}"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

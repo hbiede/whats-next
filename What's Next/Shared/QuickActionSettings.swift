@@ -6,21 +6,38 @@
 //
 
 import Foundation
-import Combine
+import Observation
 
+/// Where a home screen quick action, widget tap, Spotlight result or App Intent has asked the app to go.
+/// `MainScreenView` clears each request once it has handled it, so the same one can be made again.
+@MainActor
 @Observable
-class QuickActionSettings {
-    enum ShortcutAction: String {
+final class QuickActionSettings {
+    static let shared = QuickActionSettings()
+
+    nonisolated enum ShortcutAction: String {
         case ADD_REC = "AddRec"
         case SHOW_LIST = "ShowList"
         case GET_REC = "GetRec"
     }
 
-    var quickAction: ShortcutAction? = nil
-}
+    var quickAction: ShortcutAction?
+    var recommendationToOpen: UUID?
 
-extension QuickActionSettings: Equatable {
-    static func == (lhs: QuickActionSettings, rhs: QuickActionSettings) -> Bool {
-        lhs.quickAction == rhs.quickAction
+    private nonisolated static let openRecommendationPrefix = "OpenRec/"
+
+    /// Widget URL that opens a recommendation's detail screen
+    nonisolated static func url(opening id: UUID) -> URL? {
+        URL(string: openRecommendationPrefix + id.uuidString)
+    }
+
+    func handle(_ url: URL) {
+        let link = url.absoluteString
+        if link.hasPrefix(Self.openRecommendationPrefix),
+           let id = UUID(uuidString: String(link.dropFirst(Self.openRecommendationPrefix.count))) {
+            recommendationToOpen = id
+        } else {
+            quickAction = link == ShortcutAction.ADD_REC.rawValue ? .ADD_REC : .GET_REC
+        }
     }
 }

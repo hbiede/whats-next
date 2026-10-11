@@ -12,7 +12,9 @@ import SwiftUI
 @main
 struct WhatsNextWidgetBundle: WidgetBundle {
     var body: some Widget {
+        WhatsNextPickWidget()
         WhatsNextSingleWidget()
         WhatsNextCombinedWidget()
+        AddRecommendationControl()
     }
 }

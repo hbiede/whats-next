@@ -1,13 +1,11 @@
 # Uncomment the lines below you want to change by removing the # in the beginning
 
 # A list of devices you want to take the screenshots from
+# App Store Connect scales the 6.9" iPhone and 13" iPad screenshots down for the smaller sizes
 devices([
- "iPad Pro (12.9-inch) (2nd generation)",
- "iPad Pro (12.9-inch) (6th generation)",
- "iPad mini (5th generation)",
- "iPhone 8 Plus",
- "iPhone 13 Pro Max",
- "iPhone 14 Pro Max",
+ "iPad Pro 13-inch (M5)",
+ "iPhone 18 Pro Max",
+ "iPhone Duo",
 ])
 
 languages([
