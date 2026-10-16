@@ -19,6 +19,11 @@ platform :ios do
   desc "Generate new localized screenshots"
   lane :screenshots do
     capture_screenshots(scheme: "Snapshots")
-    upload_to_app_store(skip_binary_upload: true, skip_metadata: true)
+    upload_to_app_store(skip_binary_upload: true)
+  end
+
+  desc "Upload the App Store metadata for every language without new screenshots"
+  lane :metadata do
+    upload_to_app_store(skip_binary_upload: true, skip_screenshots: true)
   end
 end

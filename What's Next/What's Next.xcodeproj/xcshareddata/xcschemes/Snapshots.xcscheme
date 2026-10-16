@@ -41,6 +41,9 @@
                <Test
                   Identifier = "AppIntentsTests">
                </Test>
+               <Test
+                  Identifier = "WhatsNextUITests/testLaunchPerformance()">
+               </Test>
             </SkippedTests>
          </TestableReference>
       </Testables>

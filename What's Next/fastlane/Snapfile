@@ -3,14 +3,15 @@
 # A list of devices you want to take the screenshots from
 # App Store Connect scales the 6.9" iPhone and 13" iPad screenshots down for the smaller sizes
 devices([
- "iPad Pro 13-inch (M5)",
- "iPhone 18 Pro Max",
+ "iPad Pro 13-inch (M5) (16GB)",
+ "iPhone 17 Pro",
  "iPhone Duo",
 ])
 
 languages([
   "en-US",
-  "es-MX"
+  "es-MX",
+  "es-ES"
 ])
 
 # The name of the scheme which contains the UI Tests

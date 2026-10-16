@@ -1,0 +1,21 @@
+What's Next? keeps track of the books, movies, and TV shows your friends recommend. The next time you're looking for something to read or watch, you'll already have a list of ideas from people you trust.
+
+ADD A RECOMMENDATION IN SECONDS
+Save the title, who recommended it, when they did, and any notes. Books can include the author too. Add one from the app, Control Center, the Lock Screen, the Action button, or with Siri and Shortcuts.
+
+CAN'T DECIDE? LET WHAT'S NEXT? PICK
+Choose books, movies, or TV shows and get a random pick from your recommendations. Not feeling it? Shuffle for another.
+
+BROWSE YOUR LIST
+See every recommendation sorted by type, open one for the details, and edit or delete it once you're done.
+
+WIDGETS
+• Up Next shows a random recommendation on your Home Screen, with a button to shuffle for another.
+• See all your recommendations in one place, or how many you have of each type.
+Tapping a widget opens the app right where you need it.
+
+SYNCED WITH ICLOUD
+Your recommendations stay up to date across your iPhone, iPad, and Mac.
+
+SIRI, SHORTCUTS, AND SPOTLIGHT
+Ask Siri what's next, build shortcuts that open, add, or delete recommendations, and find any recommendation from Spotlight search.

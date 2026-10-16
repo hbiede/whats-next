@@ -57,15 +57,28 @@ struct ShortcutIntent: AppIntent, CustomIntentMigratedAppIntent {
 
     @MainActor
     func perform() async throws -> some IntentResult & ReturnsValue<RecommendationEntity> {
+        // Hold to what the Add Recommendation screen requires: a title, and an author for books only
+        let title = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !title.isEmpty else {
+            throw $name.needsValueError()
+        }
+        let bookAuthor = recommendationType == .book
+            ? (author ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+            : ""
+        if recommendationType == .book && bookAuthor.isEmpty {
+            throw $author.needsValueError()
+        }
+
         let viewContext = PersistenceController.shared.container.viewContext
         let newItem = Item(context: viewContext)
         newItem.id = UUID()
-        newItem.name = name.trimmingCharacters(in: .whitespacesAndNewlines)
-        newItem.author = author == nil ? "" : author!.trimmingCharacters(in: .whitespacesAndNewlines)
+        newItem.name = title
+        newItem.author = bookAuthor
         newItem.recommender = recommender == nil
                                 ? ""
                                 : recommender!.trimmingCharacters(in: .whitespacesAndNewlines)
-        newItem.recommendationDate = recommendedOn ?? Date()
+        // The Add Recommendation screen doesn't allow future dates either
+        newItem.recommendationDate = min(recommendedOn ?? Date(), Date())
         newItem.notes = notes == nil ? "" : notes!.trimmingCharacters(in: .whitespacesAndNewlines)
         newItem.type = recommendationType.description
         do {

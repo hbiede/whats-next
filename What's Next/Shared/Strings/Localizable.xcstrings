@@ -72,7 +72,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Agregar Recomendación a ¿Que Próximo?"
+            "value" : "Agregar Recomendación a ¿Qué Próximo?"
           }
         }
       }
@@ -666,7 +666,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "¿Que Próximo?: Recomendaciones"
+            "value" : "¿Qué Próximo?: Recomendaciones"
           }
         }
       }
@@ -684,7 +684,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "¿Que Próximo?"
+            "value" : "¿Qué Próximo?"
           }
         }
       }
@@ -1890,7 +1890,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ver Que Es Próximo"
+            "value" : "Ver Qué Es Próximo"
           }
         }
       }

@@ -1,0 +1,10 @@
+¿Qué Próximo? se reconstruyó para iOS 27.
+
+• Sincronización con iCloud: tus recomendaciones ahora se mantienen al día en tu iPhone, iPad y Mac.
+• Un diseño renovado en toda la app.
+• Nuevo widget Próximo que muestra una selección al azar para que pruebes después, además de widgets renovados. Al tocar un widget, la app se abre justo donde la necesitas.
+• Agrega una recomendación desde el Centro de control, la pantalla bloqueada o el botón de acción.
+• Nuevas acciones para Atajos y Siri: obtener lo próximo, abrir una recomendación, agregar una recomendación y eliminar recomendaciones.
+• Encuentra tus recomendaciones en la búsqueda de Spotlight.
+• Compatibilidad con las pantallas plegada y desplegada del iPhone Duo.
+• Correcciones: editar una recomendación ya no marca un cambio por espacios sobrantes, y ya no se permiten fechas de recomendación en el futuro.

@@ -1,0 +1,10 @@
+What's Next? has been rebuilt for iOS 27.
+
+• iCloud sync: your recommendations now stay up to date across your iPhone, iPad, and Mac.
+• A fresh design throughout the app.
+• New Up Next widget that shows a random pick for you to try next, plus refreshed widgets. Tapping a widget opens the app right where you need it.
+• Add a recommendation from Control Center, the Lock Screen, or the Action button.
+• New Shortcuts and Siri actions: get what's next, open a recommendation, add a recommendation, and delete recommendations.
+• Find your recommendations in Spotlight search.
+• Support for iPhone Duo's folded and unfolded displays.
+• Fixes: editing a recommendation no longer flags a change for stray spaces, and future recommendation dates are no longer allowed.

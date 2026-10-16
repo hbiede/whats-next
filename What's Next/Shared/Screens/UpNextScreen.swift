@@ -17,8 +17,16 @@ struct UpNextScreen: View {
         animation: .default)
     private var items: FetchedResults<Item>
 
+    /// The type to show, e.g. books after a tap on a books widget
+    let requestedType: RecType
+
     @State private var currentItem: Item?
-    @State private var selectedType: RecType = .movie
+    @State private var selectedType: RecType
+
+    init(requestedType: RecType = .movie) {
+        self.requestedType = requestedType
+        _selectedType = State(initialValue: requestedType)
+    }
 
     @ViewBuilder
     var body: some View {
@@ -46,11 +54,22 @@ struct UpNextScreen: View {
                     // Set `currentItem` for initial frame
                     currentItem = randomItem(of: selectedType)
                 }
+                .onChange(of: requestedType) { _, newType in
+                    // A widget for another type was tapped while this screen was open
+                    selectedType = newType
+                }
+                .onChange(of: items.map(\.objectID)) {
+                    // Pick again if the one on screen was deleted (e.g. by asking Siri to delete it), or if the
+                    // first recommendations have only just synced in
+                    if currentItem.map({ $0.isDeleted || $0.managedObjectContext == nil }) ?? true {
+                        currentItem = randomItem(of: selectedType)
+                    }
+                }
 
                 if let currentItem, let name = currentItem.name {
                     Text(name)
                         .font(.title)
-                        .accessibilityHint("recommendation-title-accessibility-label")
+                        .accessibilityHint("name-field")
                         .padding([.vertical], 16)
                     if currentItem.type == RecType.book.description {
                         HStack {
@@ -72,7 +91,7 @@ struct UpNextScreen: View {
                         Spacer()
                         Text(currentItem.recommender ?? "")
                             .font(.title2)
-                            .accessibilityHint("recommended-by-label")
+                            .accessibilityHint("rec-by-field-label")
                     }
                         .padding([.vertical], 4)
                     if let recommendationDate = currentItem.recommendationDate {
@@ -89,7 +108,7 @@ struct UpNextScreen: View {
                                 .accessibilityLabel(
                                     "\(recommendationDate, formatter: spokenItemFormatter)"
                                 )
-                                .accessibilityHint("recommended-on-label")
+                                .accessibilityHint("rec-date-field-label")
                         }
                             .padding([.vertical], 4)
                     }
@@ -114,7 +133,7 @@ struct UpNextScreen: View {
                 Section {
                     Button("refresh-button-label", action: {
                         // Get new `currentItem`
-                        currentItem = randomItem(of: selectedType)
+                        currentItem = randomItem(of: selectedType, excluding: currentItem)
                     })
                 }
             }
@@ -122,8 +141,11 @@ struct UpNextScreen: View {
             .navigationTitle("up-next-page-title")
     }
 
-    private func randomItem(of type: RecType) -> Item? {
-        items.filter { $0.type == type.description && $0.name != nil }.randomElement()
+    /// Avoids `current` where there's another to choose, so refreshing always shows something new
+    private func randomItem(of type: RecType, excluding current: Item? = nil) -> Item? {
+        let candidates = items.filter { $0.type == type.description && $0.name != nil }
+        let others = candidates.filter { $0 != current }
+        return (others.isEmpty ? candidates : others).randomElement()
     }
 }
 

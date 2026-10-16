@@ -131,7 +131,7 @@ struct PickWidgetView: View {
         if let recommendation = entry.recommendation {
             return QuickActionSettings.url(opening: recommendation.id)
         }
-        return URL(string: QuickActionSettings.ShortcutAction.ADD_REC.rawValue)
+        return QuickActionSettings.url(for: .ADD_REC, type: entry.type)
     }
 }
 

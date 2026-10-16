@@ -1,0 +1,1 @@
+Renovada para iOS 27: tus recomendaciones se sincronizan con iCloud, con un nuevo widget Próximo, un botón en el Centro de control y acciones de Siri y Atajos.

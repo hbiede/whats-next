@@ -70,11 +70,7 @@ struct WhatsNextSingleWidgetEntryView: View {
 
     // MARK: Get Tap URL
     func getURL() -> URL? {
-        return URL(
-            string: entry.count == 0
-                ? QuickActionSettings.ShortcutAction.ADD_REC.rawValue
-                : QuickActionSettings.ShortcutAction.GET_REC.rawValue
-        )
+        QuickActionSettings.url(for: entry.count == 0 ? .ADD_REC : .GET_REC, type: entry.type)
     }
 }
 

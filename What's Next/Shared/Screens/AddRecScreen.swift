@@ -11,7 +11,10 @@ import SwiftUI
 struct AddRecScreen: View {
     @Environment(\.managedObjectContext) private var viewContext
 
-    @State private var selectedType: RecType = .movie
+    /// The type to start on, e.g. books after a tap on an empty books widget
+    let requestedType: RecType
+
+    @State private var selectedType: RecType
     @State private var name: String = ""
     @State private var author: String = ""
     @State private var recommender: String = ""
@@ -20,6 +23,11 @@ struct AddRecScreen: View {
 
     @State private var didSave = false
     @State private var saveError = false
+
+    init(requestedType: RecType = .movie) {
+        self.requestedType = requestedType
+        _selectedType = State(initialValue: requestedType)
+    }
 
     // MARK: View
     var body: some View {
@@ -110,6 +118,10 @@ struct AddRecScreen: View {
                     )
         }
         .navigationTitle("add-rec-screen-title")
+        .onChange(of: requestedType) { _, newType in
+            // A widget for another type was tapped while this screen was open
+            selectedType = newType
+        }
     }
 
     // MARK: Confirm
@@ -119,7 +131,8 @@ struct AddRecScreen: View {
         let newItem = Item(context: viewContext)
         newItem.id = UUID()
         newItem.name = name.trimmingCharacters(in: .whitespacesAndNewlines)
-        newItem.author = author.trimmingCharacters(in: .whitespacesAndNewlines)
+        // The author field is hidden for other types, but keeps whatever was typed while a book was selected
+        newItem.author = selectedType == .book ? author.trimmingCharacters(in: .whitespacesAndNewlines) : ""
         newItem.recommender = recommender.trimmingCharacters(in: .whitespacesAndNewlines)
         newItem.recommendationDate = recDate
         newItem.notes = notes.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -147,16 +160,20 @@ struct AddRecScreen: View {
     private func onRecommenderChange(_ recommender: String) {
         switch recommender {
         case NSLocalizedString("toy-story-recommender", comment: "Who recommender Toy Story"):
-            recDate = ISO8601DateFormatter().date(from: "2021-06-24T10:00:00+0000")!
+            recDate = daysAgo(21)
         case NSLocalizedString("breaking-bad-recommender", comment: "Who recommender Breaking Bad"):
-            recDate = ISO8601DateFormatter().date(from: "2019-09-14T10:00:00+0000")!
+            recDate = daysAgo(243)
         case NSLocalizedString("star-trek-recommender", comment: "Who recommender Star Trek"):
-            recDate = ISO8601DateFormatter().date(from: "2020-05-29T10:00:00+0000")!
+            recDate = daysAgo(139)
         case NSLocalizedString("parks-and-rec-recommender", comment: "Who recommender Parks and Rec"):
-            recDate = ISO8601DateFormatter().date(from: "2020-10-17T10:00:00+0000")!
+            recDate = daysAgo(90)
         default:
             break
         }
+    }
+
+    private func daysAgo(_ days: Int) -> Date {
+        Calendar.current.date(byAdding: .day, value: -days, to: Date())!
     }
     #endif
 }

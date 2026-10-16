@@ -1,0 +1,1 @@
+Rebuilt for iOS 27: your recommendations now sync with iCloud, plus a new Up Next widget, a Control Center button, and Siri and Shortcuts actions.

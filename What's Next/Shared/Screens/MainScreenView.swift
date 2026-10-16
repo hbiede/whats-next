@@ -20,12 +20,21 @@ struct MainScreenView: View {
     @State private var showAddRec = false
     @State private var showList = false
     @State private var openedItem: Item?
+    /// The type Up Next and Add Recommendation start on
+    @State private var requestedType: RecType = .movie
 
     func handleQuickAction(_ newAction: QuickActionSettings.ShortcutAction?) {
         guard let newAction else { return }
+        let type = quickActionSettings.requestedType
         // Clear it so asking for the same screen again still triggers `onChange`
         quickActionSettings.quickAction = nil
-        switch newAction {
+        quickActionSettings.requestedType = nil
+        show(newAction, type: type)
+    }
+
+    func show(_ action: QuickActionSettings.ShortcutAction, type: RecType?) {
+        requestedType = type ?? .movie
+        switch action {
         case .ADD_REC:
             showAddRec = true
         case .GET_REC:
@@ -63,7 +72,7 @@ struct MainScreenView: View {
                     Spacer()
                     // The labels stay part of their buttons, so VoiceOver and UI tests find them by name
                     Button {
-                        showGetRec = true
+                        show(.GET_REC, type: nil)
                     } label: {
                         Text("whats-next-menu-button", comment: "Button to get to the Up Next page")
                             .font(.largeTitle)
@@ -78,7 +87,7 @@ struct MainScreenView: View {
                     .opacity(items.isEmpty ? 0.4 : 1)
                     .disabled(items.isEmpty)
                     Button {
-                        showAddRec = true
+                        show(.ADD_REC, type: nil)
                     } label: {
                         Text("add-menu-button", comment: "Button to get to the Add Recommendation page")
                             .font(.title)
@@ -106,10 +115,10 @@ struct MainScreenView: View {
                 }
             }
             .navigationDestination(isPresented: $showGetRec) {
-                UpNextScreen().environment(\.managedObjectContext, viewContext)
+                UpNextScreen(requestedType: requestedType).environment(\.managedObjectContext, viewContext)
             }
             .navigationDestination(isPresented: $showAddRec) {
-                AddRecScreen()
+                AddRecScreen(requestedType: requestedType)
             }
             .navigationDestination(isPresented: $showList) {
                 ItemListView().environment(\.managedObjectContext, viewContext)

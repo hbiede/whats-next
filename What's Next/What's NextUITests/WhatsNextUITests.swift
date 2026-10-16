@@ -8,8 +8,6 @@
 
 import XCTest
 
-let SNAPSHOPPING = false
-
 class WhatsNextUITests: XCTestCase {
 
     override func setUpWithError() throws {
@@ -22,9 +20,7 @@ class WhatsNextUITests: XCTestCase {
     func testSnapshots() throws {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
-        if SNAPSHOPPING {
-            setupSnapshot(app, waitForAnimations: false)
-        }
+        setupSnapshot(app, waitForAnimations: false)
         // Start from an empty store every run; fastlane's setupSnapshot adds this too
         if !app.launchArguments.contains("-ui_testing") {
             app.launchArguments.append("-ui_testing")
@@ -44,9 +40,7 @@ class WhatsNextUITests: XCTestCase {
         type(string("toy-story-recommender"), into: form.textFields[string("rec-by-field-label")])
         type(string("toy-story-notes"), into: form.textFields[string("notes-field-label")])
 
-        if SNAPSHOPPING {
-            snapshot("2AddRecommendation")
-        }
+        snapshot("2AddRecommendation")
 
         // Put the keyboard away so it can't cover the Add button
         app.typeText("\n")
@@ -66,10 +60,8 @@ class WhatsNextUITests: XCTestCase {
             XCTAssertTrue(savedMessage.waitForExistence(timeout: 2))
         }
 
-        app.navigationBars[string("add-rec-screen-title")].buttons.firstMatch.tap()
-        if SNAPSHOPPING {
-            snapshot("4MainMenu")
-        }
+        goBack(in: app)
+        snapshot("4MainMenu")
 
         // MARK: See What's Next
         app.buttons[string("whats-next-menu-button")].tap()
@@ -84,17 +76,13 @@ class WhatsNextUITests: XCTestCase {
             }
         )
         XCTAssertTrue(refreshButton.exists)
-        if SNAPSHOPPING {
-            snapshot("1Recommendation")
-        }
+        snapshot("1Recommendation")
 
         // MARK: See List
-        app.navigationBars[string("up-next-page-title")].buttons.firstMatch.tap()
+        goBack(in: app)
         app.buttons[string("see-list-menu-button")].tap()
         XCTAssertTrue(form.waitForExistence(timeout: 2))
-        if SNAPSHOPPING {
-            snapshot("3List")
-        }
+        snapshot("3List")
 
         // Clear entries
         for _ in 0..<4 {
@@ -105,15 +93,20 @@ class WhatsNextUITests: XCTestCase {
     }
     // swiftlint:enable function_body_length
 
-    // Uncomment when not using as a snapshot scheme
+    // Skipped in the Snapshots scheme
     @MainActor
     func testLaunchPerformance() throws {
-        if !SNAPSHOPPING {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
+        // This measures how long it takes to launch your application.
+        measure(metrics: [XCTApplicationLaunchMetric()]) {
+            XCUIApplication().launch()
         }
+    }
+
+    /// iOS 27 moved the system back button out of the navigation bar into its own toolbar,
+    /// so find it by UIKit's identifier instead of through the bar
+    @MainActor
+    private func goBack(in app: XCUIApplication) {
+        app.buttons["BackButton"].firstMatch.tap()
     }
 
     @MainActor

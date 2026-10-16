@@ -30,7 +30,9 @@ struct PickWidgetProvider: AppIntentTimelineProvider {
 
     func timeline(for configuration: Intent, in context: Context) async -> Timeline<Entry> {
         // A fresh pick each day; the app reloads sooner when its recommendations change
-        let tomorrow = Calendar.current.startOfDay(for: Date()).addingTimeInterval(24 * 60 * 60)
+        // Adding a calendar day, not 24 hours, so it's still midnight when the clocks change
+        let today = Calendar.current.startOfDay(for: Date())
+        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: today) ?? today.addingTimeInterval(24 * 60 * 60)
         return Timeline(entries: [entry(for: configuration)], policy: .after(tomorrow))
     }
 

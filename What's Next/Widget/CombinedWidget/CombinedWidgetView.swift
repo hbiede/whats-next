@@ -17,13 +17,7 @@ struct WhatsNextCombinedWidgetEntryView: View {
 
     var body: some View {
         content
-            .widgetURL(
-                URL(
-                    string: entry.isEmpty
-                        ? QuickActionSettings.ShortcutAction.ADD_REC.rawValue
-                        : QuickActionSettings.ShortcutAction.GET_REC.rawValue
-                )
-            )
+            .widgetURL(QuickActionSettings.url(for: entry.isEmpty ? .ADD_REC : .GET_REC))
             .widgetBackground(for: widgetFamily)
     }
 

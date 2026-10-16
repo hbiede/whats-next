@@ -32,15 +32,7 @@ struct ItemDetailView: View {
     @ViewBuilder
     var body: some View {
         Form {
-            if didSave &&
-                name == item.name &&
-                author == item.author &&
-                recommender == item.recommender &&
-                (
-                    item.recommendationDate == nil ||
-                    itemFormatter.string(from: item.recommendationDate!) == itemFormatter.string(from: recDate)
-                ) &&
-                notes == item.notes {
+            if didSave && !hasChanges {
                 Section {
                     Text("success-saved-message", comment: "Message for when an entry is successfully added")
                 }
@@ -74,6 +66,7 @@ struct ItemDetailView: View {
                 DatePicker(
                     "rec-date-field-label",
                     selection: $recDate,
+                    in: ...Date(),
                     displayedComponents: [.date]
                 )
                 TextField(
@@ -83,77 +76,64 @@ struct ItemDetailView: View {
                     .multilineTextAlignment(.leading)
                     .lineLimit(3)
             }
-                .onAppear {
-                    name = item.name ?? ""
-                    author = item.author ?? ""
-                    recommender = item.recommender ?? ""
-                    recDate = item.recommendationDate ?? Date()
-                    notes = item.notes ?? ""
-                }
+                .onAppear(perform: loadSavedValues)
             Button("delete-recommnedation-button", role: .destructive, action: delete)
-            if
-                item.name != name ||
-                    item.author != author ||
-                    item.recommender != recommender ||
-                    item.notes != notes ||
-                    item.recommendationDate == nil ||
-                    itemFormatter.string(from: recDate) != itemFormatter.string(from: item.recommendationDate!)
-            {
+            if hasChanges {
                 // Recommended by is optional, as it is when adding
                 Button("save-change-button", action: confirm)
                     .disabled(
-                        name.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-                        (
-                            item.type == RecType.book.description &&
-                            author.trimmingCharacters(in: .whitespacesAndNewlines) == ""
-                        )
+                        trimmed(name).isEmpty ||
+                        (item.type == RecType.book.description && trimmed(author).isEmpty)
                     )
-                Button("undo-change-button", role: .cancel, action: undo)
+                Button("undo-change-button", role: .cancel, action: loadSavedValues)
             }
         }
         .navigationTitle("edit-recommendation-page-title")
         .appEntityIdentifier(item.id.map(RecommendationEntity.identifier(for:)))
     }
 
+    /// Compares what will be saved, so whitespace that saving trims off (like the space after a QuickType
+    /// suggestion) doesn't count as a change, and a missing value matches an empty field
+    private var hasChanges: Bool {
+        trimmed(name) != (item.name ?? "") ||
+            trimmed(author) != (item.author ?? "") ||
+            trimmed(recommender) != (item.recommender ?? "") ||
+            trimmed(notes) != (item.notes ?? "") ||
+            !(item.recommendationDate.map { Calendar.current.isDate($0, inSameDayAs: recDate) } ?? false)
+    }
+
+    private func trimmed(_ text: String) -> String {
+        text.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
     // MARK: Confirm
     func confirm() {
         didSave = false
-        if name.trimmingCharacters(in: .whitespacesAndNewlines) != item.name {
-            item.setValue(name.trimmingCharacters(in: .whitespacesAndNewlines), forKey: "name")
-            didSave = true
+        if trimmed(name) != (item.name ?? "") {
+            item.name = trimmed(name)
+        }
+        if trimmed(author) != (item.author ?? "") {
+            item.author = trimmed(author)
+        }
+        if trimmed(recommender) != (item.recommender ?? "") {
+            item.recommender = trimmed(recommender)
+        }
+        if !(item.recommendationDate.map { Calendar.current.isDate($0, inSameDayAs: recDate) } ?? false) {
+            item.recommendationDate = recDate
+        }
+        if trimmed(notes) != (item.notes ?? "") {
+            item.notes = trimmed(notes)
         }
 
-        if author.trimmingCharacters(in: .whitespacesAndNewlines) != item.author {
-            item.setValue(author.trimmingCharacters(in: .whitespacesAndNewlines), forKey: "author")
+        guard viewContext.hasChanges else { return }
+        do {
+            try viewContext.save()
             didSave = true
-        }
-
-        if recommender.trimmingCharacters(in: .whitespacesAndNewlines) != item.recommender {
-            item.setValue(recommender.trimmingCharacters(in: .whitespacesAndNewlines), forKey: "recommender")
-            didSave = true
-        }
-
-        if
-            item.recommendationDate == nil ||
-            itemFormatter.string(from: item.recommendationDate!) != itemFormatter.string(from: recDate)
-        {
-            item.setValue(recDate, forKey: "recommendationDate")
-            didSave = true
-        }
-
-        if notes.trimmingCharacters(in: .whitespacesAndNewlines) != item.notes {
-            item.setValue(notes.trimmingCharacters(in: .whitespacesAndNewlines), forKey: "notes")
-            didSave = true
-        }
-
-        if didSave && viewContext.hasChanges {
-            do {
-                try viewContext.save()
-            } catch {
-                print("Failed to save changes: \(error)")
-                viewContext.rollback()
-                didSave = false
-            }
+            // Show what was saved, without the trimmed whitespace
+            loadSavedValues()
+        } catch {
+            print("Failed to save changes: \(error)")
+            viewContext.rollback()
         }
     }
 
@@ -171,7 +151,7 @@ struct ItemDetailView: View {
     }
 
     // MARK: Undo
-    func undo() {
+    func loadSavedValues() {
         name = item.name ?? ""
         author = item.author ?? ""
         recommender = item.recommender ?? ""
@@ -179,10 +159,3 @@ struct ItemDetailView: View {
         notes = item.notes ?? ""
     }
 }
-
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .none
-    return formatter
-}()

@@ -51,20 +51,22 @@ struct ItemListView: View {
         }
         #endif
         .navigationTitle("recommendation-list-page-title")
+        .onChange(of: items.isEmpty) { _, isEmpty in
+            // Go back if list is empty, however the last one went: swiped away here, deleted on its detail screen,
+            // by Siri, or on another device
+            if isEmpty {
+                self.dismiss()
+            }
+        }
     }
 
     // MARK: Delete
     private func deleteItems(_ itemsToDelete: [Item]) {
         withAnimation {
-            let isDeletingEverything = itemsToDelete.count == items.count
             itemsToDelete.forEach(viewContext.delete)
 
             do {
                 try viewContext.save()
-                if isDeletingEverything {
-                    // Go back if list is empty
-                    self.dismiss()
-                }
             } catch {
                 print("Failed to delete: \(error)")
                 viewContext.rollback()
